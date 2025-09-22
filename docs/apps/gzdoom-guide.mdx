@@ -1,0 +1,132 @@
+---
+sidebar_position: 2
+title: GZDoom Setup and Modding Guide
+description: Complete guide for installing and setting up GZDoom Doom engine port on Xbox
+---
+
+# GZDoom Setup and Modding on Xbox made by MewLew
+
+This guide explains how to set up GZDoom, a source port of the Doom engine, on an Xbox Series S/X in Developer Mode, including how to install games and mods. It covers both external (USB drive) and internal (console storage) installation methods.
+
+## External Drive Setup
+
+This method uses a USB drive for storing game files and mods.
+
+### 1. Prepare the External Drive
+
+1.  **Create a GZDoom Folder:**  On your external drive (e.g., `E:\`), create a main folder for GZDoom.  You can name it `GZDoom` or something similar.
+
+2.  **Create Subfolders:** Inside the `GZDoom` folder, create the following two subfolders:
+    *   `Mods`: This folder will hold your mod files (usually `.pk3` or `.zip` files).
+    *   `Games`: This folder will store your game `.wad` files (e.g., `doom.wad`, `doom2.wad`).
+
+3.  **Copy Game Files:** Copy your game `.wad` files into the `Games` folder.  Example: `E:\GZDoom\Games\doom.wad`.
+
+### 2. Initial GZDoom Launch and Game Selection
+
+1.  **Install GZDoom:** Install the GZDoom application through the Xbox Dev Portal (instructions for accessing the Dev Portal are assumed to be known).
+2.  **Launch GZDoom:** Launch GZDoom on your Xbox.
+3. **Navigate and select your Games folder:**  You'll be prompted to select a folder.  Navigate to your external drive and select the *Games* folder you created (e.g., `E:\GZDoom\Games`).
+
+    *   **Single Game:** If you have only one `.wad` file in the `Games` folder, GZDoom will load that game automatically.
+    *   **Multiple Games:** If you have multiple `.wad` files, a basic menu will appear.
+        *   Use the **B** button to scroll through the list if there are more than six games.
+        *   Use the **A** button to select a game.
+
+### 3. Modding (External Drive)
+
+1.  **Copy Mod Files:** Copy your mod files (`.pk3` or `.zip` files) into the `Mods` folder (e.g., `E:\GZDoom\Mods`).
+
+2. **Launch GZDoom Once:**  Follow steps 1-3 from section 2. (Initial GZDoom Launch and Game Selection) to generate an ini file, if this hasn't been done already.
+
+3.  **Locate the INI File:** Find the `gzdoom_portable.ini` file within your `Games` folder.  Example: `E:\GZDoom\Games\gzdoom_portable.ini`.
+
+4.  **Edit the INI File:**
+    *   Open `gzdoom_portable.ini` using a text editor (like Notepad on Windows).
+    *   Find the `[Global.Autoload]` section.  This section applies mods to *all* games.
+    *   Add a `Path=` line for *each* mod you want to load globally, specifying the *full path* to the mod file.  Example:
+
+    ```ini
+    [Global.Autoload]
+    Path=E:\GZDoom\Mods\Universal_Enhanced_AI.pk3
+    ```
+
+    *   **Game-Specific Mods:** To load mods for a *specific* game only, find the section for that game (e.g., `[doom.id.Autoload]` for the original Doom).  Add the `Path=` lines for the mods under that specific section. Example:
+
+    ```ini
+    [doom.id.Autoload]
+    Path=E:\GZDoom\Mods\brutalv21.pk3
+    ```
+
+5.  **Save the INI File:**  Save the changes you made to `gzdoom_portable.ini`. Ensure it's saved back into your `Games` folder.
+
+6.  **Launch and Play:** Launch GZDoom. Your selected mods should now be active.
+
+## Internal Setup
+
+This method uses the Xbox's internal storage.
+
+### 1. Initial GZDoom Setup
+
+1.  **Install and Launch:** Install GZDoom via the Dev Portal and launch it *once*.
+2.  **Exit GZDoom:** When prompted to select a folder, press the **B** button to exit GZDoom.  This initial launch creates necessary folders.
+
+### 2. Access the Xbox Filesystem
+
+1.  **Open Dev Portal:** On your PC, open the Xbox Dev Portal (instructions for accessing the Dev Portal are assumed to be known).
+2.  **Navigate to LocalState:** Use the Dev Portal's File Explorer to navigate to the following directory: `LocalAppData > GZDoom > LocalState`.
+
+### 3. Copy Game Files
+
+1.  **Copy WADs:** Copy your game `.wad` files *directly* into the `LocalState` folder (not into a subfolder).
+
+### 4. Launch and Play (Internal)
+
+1.  **Launch GZDoom:** Launch GZDoom on your Xbox.
+
+    *   **Single Game:** If you have only one `.wad` file, GZDoom will load it automatically.
+    *   **Multiple Games:** If multiple `.wad` files are present, a menu will appear.
+        *   Use **B** to scroll (if more than six games).
+        *   Use **A** to select.
+
+### 5. Modding (Internal)
+
+1.  **Create Mods Folder:** Inside the `LocalState` folder, create a new folder named `Mods` (if it doesn't already exist).
+
+2.  **Copy Mod Files:** Copy your mod files (`.pk3` or `.zip`) into the `Mods` folder.
+
+3.  **Locate the INI File:** Find the `gzdoom_portable.ini` file within the `LocalState` folder and save it to your PC.
+
+4.  **Edit the INI File:**
+    *   Open `gzdoom_portable.ini` in a text editor.
+    *   Locate the `[Global.Autoload]` section.
+    *   Add a `Path=` line for each mod, specifying the *relative* path from the `LocalState` folder. Example:
+
+    ```ini
+    [Global.Autoload]
+    Path=Mods\Universal_Enhanced_AI.pk3
+    ```
+
+    *   **Game-Specific Mods:** For game-specific mods, add the `Path=` lines under the appropriate section (e.g., `[doom.id.Autoload]`). Example:
+
+    ```ini
+    [doom.id.Autoload]
+    Path=Mods\brutalv21.pk3
+    ```
+
+5. **Save and Reupload:** Save your modified `gzdoom_portable.ini` to your PC, then using the **Dev Portal**, upload and replace the `gzdoom_portable.ini` back into the `LocalState` folder on your Xbox.
+
+6.  **Launch and Play:** Launch GZDoom; your mods should be loaded.
+
+## Notes and Tips
+
+*   **Global vs. Specific Mods:** Mods listed under `[Global.Autoload]` will be loaded for *all* games.  To load mods only for specific games, add them under the relevant game-specific section (e.g., `[doom.doom2.Autoload]` for Doom II).
+*   **Conflicting Mods:** Avoid loading multiple mods that conflict with each other unless they are specifically designed to be compatible.
+*   **INI File Customization:**  The `.ini` file can also be used to customize various settings:
+    *   **Graphics:** Adjust resolution, visual effects, and other graphical options.
+    *   **Controls:**  Remap keyboard, mouse, and gamepad inputs to your preferences.
+*   **Video Tutorials:** For visual learners, Revive offers helpful video tutorials:
+    *   **Setup:** [https://youtu.be/M1LX8MifJhM](https://youtu.be/M1LX8MifJhM)
+    *   **Modding:** [https://youtu.be/CnOntH5Hr6s?si=Iwzi3rEioUWO1dAs](https://youtu.be/CnOntH5Hr6s?si=Iwzi3rEioUWO1dAs)
+
+This guide should provide a clear and well-structured method for setting up and modding GZDoom on your Xbox in Developer Mode.  Enjoy!

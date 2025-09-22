@@ -1,0 +1,162 @@
+---
+sidebar_position: 3
+title: LaunchPass Setup Guide
+description: Complete guide for installing and setting up LaunchPass emulator frontend on Xbox
+---
+
+# What is LaunchPass?
+
+LaunchPass is a Frontend that is capable of launching ROMs in most Emulators on Xbox One and Series S|X Consoles.
+
+## Requirements Checklist
+
++ **External USB Drive**
+You will need a properly formatted USB drive to use LaunchPass. The USB drive must be formatted in NTFS and have the correct permissions - see the [Xbox Developer Mode Setup](/docs/xbox-setup/xbox-developer-mode-setup) guide for the steps. We recommend using an external SSD for smoother performance.
+
++ **Developer Mode on Xbox**
+To run homebrew applications such as LaunchPass, you need to enable Developer Mode. This allows you to install applications that aren't available from the Microsoft Store. If you haven't enabled Developer Mode yet, don't worry - we've got you covered in the [Xbox Developer Mode Setup](/docs/xbox-setup/xbox-developer-mode-setup) guide.
+
++  **LaunchBox**
+You will need LaunchBox to use LaunchPass.
+
+## Setting up LaunchPass on Xbox
+
+1. On your computer, see the [Installation](#installation) section below for download instructions.
+2. Download the latest version of Launchpass.
+3. You'll get the .MSIX file (LaunchPass)
+
+## Transfer the Files to Xbox
+
+1. Go to Xbox Dev Mode on your Xbox. Look for the IP address of your Xbox on the Developer Home Screen (it looks like 192.168.x.x).
+2. On your PC, open a web browser and enter the Xbox IP address in the URL bar. This opens the Xbox Device Portal.
+3. Sign in using your Xbox Developer credentials.
+
+## Upload LaunchPass
+
+1. In the Device Portal, go to My Games & Apps.
+2. Click Add, then select Choose File.
+3. Upload the LaunchPass .MsixBundles file
+4. Click Next and follow the prompts to install.
+5. Go to Dev Mode on your Xbox then Select LaunchPass and click Guide button on your controller > View Details
+Turn LaunchPass Game to App to be able to use Launchpass properly.
+
+**Troubleshooting**: If the app doesn't install correctly or gets stuck, refresh the page and retry.
+
+## Install LaunchBox on USB
+
+1. You will need to [Download LaunchBox](https://www.launchbox-app.com/download).
+2. Open LaunchBox Setup App then Choose USB Location (E:\LaunchBox) to install on USB instead of Local Computer User.
+
+## Setup Emulators on LaunchPass
+
+1. Open LaunchBox on your USB
+2. Go to MENU > Tools > Manage > Emulators
+
+![LaunchPass Main Guide](/img/launchpass/launchpassguidemain.png)
+
+3. Click Add button
+
+![LaunchPass Main Guide 2](/img/launchpass/launchpassguidemain2.png)
+
+**I'm only gonna create for PS2/PSP Games, You can add many emulators you wish**
+
+## XBSX2 Installation on LaunchPass
+
+1. **Make sure to write Emulator name correctly and then for Application Path, Make sure they are in lowercase.**
+
+![LaunchPass XBSX2 Guide](/img/launchpass/launchpassguidexbsx2.png)
+
+**Check "Attempt to hide console window on startup/shutdown"**
+
+2. Go to Associated Platforms Tab > Type Sony Playstation 2
+
+![LaunchPass XBSX2 Guide 2](/img/launchpass/launchpassguidexbsx22.png)
+
+3. Make sure Default Emulator is **Checked**
+4. Click Add once you are done
+
+## Standalone PPSSPP Installation on LaunchPass
+
+1. Click Add Option on Manage Emulators again
+
+![LaunchPass PPSSPP Guide](/img/launchpass/launchpassguideppsspp.png)
+
+**BE SURE TO PUT APPLICATION PATH .exe IN THE END IF YOU ARE USING STANDALONE EMULATOR**
+
+2. Make sure to put What I wrote In the Picture
+3. Go to Associated Platforms Tab
+
+![LaunchPass PPSSPP Guide 2](/img/launchpass/launchpassguideppsspp2.png)
+
+4. Put Sony PSP on list then finally Click Add button Once you are done!
+
+## Add Games on Launchbox
+
+1. Go to TOOLS > Import > ROM Files
+
+![LaunchPass Main Guide 3](/img/launchpass/launchpassguidemain3.png)
+
+2. For XBSX2 Put your PS2 Games Folder there
+
+![LaunchPass Main Guide 4](/img/launchpass/launchpassguidemain4.png)
+
+3. Click Next Button
+4. Choose Sony Playstation 2 From list for XBSX2
+
+![LaunchPass Main Guide 5](/img/launchpass/launchpassguidemain5.png)
+
+5. Click Next Button
+6. XBSX2 is automatically on List you can Click Next Button Again
+
+![LaunchPass Main Guide 6](/img/launchpass/launchpassguidemain6.png)
+
+7. ***Use the files in their current Location***
+8. Click Next Button again
+
+![LaunchPass Main Guide 7](/img/launchpass/launchpassguidemain7.png)
+
+9. You can download which covers to load on LaunchPass (I'm gonna Check All)
+10. Click Next button again (EmuMovies isn't needed.)
+
+![LaunchPass Main Guide 8](/img/launchpass/launchpassguidemain8.png)
+
+11. Make sure to Deselect All Options in the below Picture
+
+![LaunchPass Main Guide 9](/img/launchpass/launchpassguidemain9.png)
+
+12. **Be sure to check if All Games show up**
+13. Click Finish Button once you are done!
+
+![LaunchPass Main Guide 10](/img/launchpass/launchpassguidemain10.png)
+
+***Wait for all coverarts of PS2 Games to download***
+
+Once all are downloaded successfully then I will explain PPSSPP Guide
+
+1. TOOLS > Import > ROM Files
+
+![LaunchPass Main Guide 3](/img/launchpass/launchpassguidemain3.png)
+
+2. For PPSSPP Put your PSP Games Folder there
+3. Click Next Button
+
+![LaunchPass PPSSPP Guide 3](/img/launchpass/launchpassguideppsspp3.png)
+
+4. Choose Sony PSP From list for PPSSPP
+
+![LaunchPass PPSSPP Guide 4](/img/launchpass/launchpassguideppsspp4.png)
+
+5. Click Next Button
+6. PPSSPP is automatically on List you can Click Next Button Again
+
+![LaunchPass PPSSPP Guide 5](/img/launchpass/launchpassguideppsspp5.png)
+
+7 and last, You can do same thing as 7/8/9/10/11 from XBSX2 LaunchPass ^^
+
+then Wait for coverarts to Download then Eject USB and plug into your Xbox Console
+
+then Open LaunchPass on your Xbox Console
+
+![LaunchPass Main Guide Last](/img/launchpass/launchpassguidemainlast.png)
+
+Activate it & Enjoy it!! ^^

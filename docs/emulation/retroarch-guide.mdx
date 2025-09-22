@@ -1,0 +1,206 @@
+---
+sidebar_position: 5
+title: RetroArch Setup Guide (Mesa/Angle for Xbox)
+description: Complete guide for installing and setting up RetroArch on Xbox Developer Mode
+---
+
+# RetroArch Setup Guide (Mesa/Angle for Xbox)
+
+This guide provides instructions for installing and setting up RetroArch (Mesa for Xbox Series X|S, Angle for Xbox One) on consoles running in Developer Mode.
+
+**Important:** This guide **ONLY** covers RetroArch Mesa and RetroArch Angle. For the Citra (Nintendo 3DS) core, please refer to the separate `RetroArch Setup Guide (Citra)`.
+
+## 1. Prerequisites
+
+Before you begin, ensure the following conditions are met:
+
+*   **Xbox Developer Mode Activated:** Your Xbox console must be successfully set up and running in Developer Mode.
+*   **Remote Access Enabled:** Remote Access must be enabled and configured within the Xbox Dev Home application.
+*   **(For USB Users) USB Drive Prepared:** If using an external USB drive, it *must* be formatted as NTFS and have full read/write permissions set for UWP applications.
+
+> **Need help with prerequisites?** See the [_Xbox Developer Mode Setup_](/docs/xbox-setup/xbox-developer-mode-setup) guide for detailed instructions on activating Dev Mode, setting up Remote Access, and preparing a USB drive.
+
+## 2. Obtaining RetroArch UWP
+
+You have a couple of options for getting the RetroArch UWP application:
+
+*   **Xbox Dev Store (Recommended for most users):**
+    *   This is the easiest method. See the [Installation](#installation) section below for download instructions.
+    *   **Note:** The versions on the Dev Store (excluding the Citra build) typically *do not* come with cores pre-installed. You will need to download them later using the Online Updater (covered in Step 5).
+
+*   **Compiling from Source (Advanced Users):**
+    *   If you are comfortable compiling software from source code, you can build the latest versions yourself.
+    *   The primary repository for UWP builds is maintained by the Xbox Emulation Hub: [https://github.com/XboxEmulationHub/RetroArch/releases](https://github.com/XboxEmulationHub/RetroArch/releases)
+    *   This guide does not cover the compilation process itself.
+
+## 3. Installing RetroArch on Xbox
+
+Use the Xbox Device Portal to install the RetroArch application package (`.appx` or `.msixbundle`).
+
+1.  **Access Dev Portal:** On your PC or Smartphone, open a web browser and navigate to the Remote Access URL displayed in Dev Home on your Xbox.
+    *   **Note:** This URL can change. Always verify it in Dev Home before connecting.
+2.  **Bypass Security Warning:** If your browser shows a security warning ("Your connection is not private"), click "Advanced" and "Proceed" (or the equivalent option). Edge browser typically handles this well.
+3.  **Navigate to "Add":** Under the "My games & apps" section, click "Add".
+4.  **Extract Files:** If you downloaded a `.zip` file, extract its contents on your PC or phone. You should have at least one `.appx` or `.msixbundle` file and potentially a dependency file.
+5.  **Upload Appx/Msixbundle:** Click "Choose File" (or drag and drop on PC) and select the main RetroArch application file (e.g., `RetroArch.appx`).
+6.  **Start Installation:** Click "Start" and wait for the installation to complete ("Package successfully registered").
+
+## 4. Initial Launch Configuration
+
+This step is crucial for performance and proper function.
+
+1.  **Locate RetroArch in Dev Home:** On your Xbox, go back to Dev Home. Find "RetroArch" in the list (it might be at the bottom).
+2.  **Change Type to "Game":**
+    *   Highlight RetroArch and press the "View" button (the button with two overlapping squares, formerly known as "Back").
+    *   Select "View details".
+    *   Change the "App type" (or similar wording) from "App" to "Game".
+    *   Press B to go back.
+3.  **(Recommended) Restart Console:** It's good practice to restart your Xbox after changing the app type. Select "Restart console" from the Dev Home main menu.
+4.  **Launch RetroArch:**
+    *   After the restart, go back to Dev Home.
+    *   Select "Launch Home" to go to the standard Xbox dashboard.
+    *   Navigate to "My games & apps".
+    *   RetroArch should now appear under the "Games" category.
+    *   Select RetroArch and press A to launch it.
+
+## 5. Setting Up RetroArch (Internal Configuration)
+
+Once RetroArch is launched, perform these initial setup steps.
+
+### 5.1. Online Updater (Essential First Step)
+
+1.  **Navigate:** Go to `Main Menu > Online Updater`.
+2.  **Update Components:** Select and run *each* of the following options:
+    *   `Update Core Info Files`
+    *   `Update Assets`
+    *   `Update Controller Profiles`
+    *   `Update Cheats`
+    *   `Update Databases`
+    *   `Update Overlays`
+    *   `Update Slang Shaders` (Note: Slang shaders might be broken in some UWP builds; don't worry if this fails).
+
+### 5.2. Downloading Cores
+
+1.  **Navigate:** Go to `Main Menu > Online Updater`.
+2.  **Select Core Downloader:** Choose `Core Downloader`.
+3.  **Download:** Select the desired emulator core from the list and press A to download it. Repeat for all cores you intend to use.
+    *   **Note:** This can only be done *after* running the "Update Core Info Files" option in the previous step.
+    *   **WARNING:** Do **NOT** update `Mupen64Plus-Next`, `ParaLLEl N64`, or `Yabasanshiro` via the Core Downloader if you are using a build specifically configured for ANGLE (typically Xbox One). These builds use modified core versions. Updating them will likely break them. Download them initially, but do not update them later via the Online Updater unless explicitly instructed.
+
+### 5.3. Setting Directories (USB Users)
+
+If you store your games, BIOS files, saves, etc., on an external USB drive, configure RetroArch to find them.
+
+1.  **Navigate:** Go to `Settings > Directory`.
+2.  **Set Paths:** Select each directory type you want to change (e.g., `File Browser`, `System/BIOS`, `Saves`, `States`).
+3.  **Browse:** Navigate to the corresponding folder on your USB drive (it will appear as the `E:\` drive) and select `<Use This Directory>`.
+4.  **WARNING:** **DO NOT** change the `Core` directory. This will prevent RetroArch from finding your downloaded cores.
+
+### 5.4. Setting BIOS Directory (Internal/LocalState Users)
+
+If you are *not* using a USB drive, BIOS files need to be placed within RetroArch's `LocalState` folder.
+
+1.  **Navigate (Dev Portal):** Using the Xbox Device Portal File Explorer, go to: `LocalAppData\[RetroArch Folder Name]\LocalState`.
+2.  **Create `system` Folder:** Create a folder named `system` inside `LocalState` if it doesn't already exist.
+3.  **Copy BIOS Files:** Place your required BIOS files into this `system` folder (or specific subfolders within `system` as needed by certain cores - see Troubleshooting).
+4.  **Configure in RetroArch:** Go to `Settings > Directory > System/BIOS` and ensure it points to the `system` folder within RetroArch's directory structure (it might detect this automatically, but verify).
+
+## 6. Adding Games (Creating Playlists)
+
+There are two main ways to add your games to RetroArch's menus.
+
+### 6.1. Scan Directory (Automatic Scanning)
+
+This works best for games with unique file extensions or those recognized by RetroArch's database.
+
+1.  **Navigate:** Go to `Main Menu > Import Content > Scan Directory`.
+2.  **Select Game Folder:** Browse to the folder containing your games (e.g., `E:\Games\SNES` on your USB drive or the relevant folder in `LocalState`).
+3.  **Scan:** Select `<Scan This Directory>`.
+4.  **Wait:** RetroArch will scan the folder and attempt to match games to its database, creating a playlist.
+    *   **Note:** You *must* have the corresponding core downloaded *before* scanning, otherwise RetroArch may crash.
+
+### 6.2. Manual Scan (For Unrecognized Games/Common Extensions)
+
+Use this method for file types like `.iso`, `.bin`, `.chd`, `.cue`, etc., that might not scan automatically or are used by multiple systems.
+
+1.  **Navigate:** Go to `Main Menu > Import Content > Manual Scan`.
+2.  **Content Directory:** Browse to the folder containing the specific set of games you want to scan (e.g., `E:\Games\PSX`). Select `<Scan This Directory>`.
+3.  **System Name:** Choose the correct system (e.g., `Sony - PlayStation`). You can also set a custom name if desired.
+4.  **Default Core:** Select the core you want to use to launch these games (e.g., `Sony - PlayStation (Beetle PSX HW)`).
+5.  **File Extensions:** Enter the file extensions for your games in this folder, separated by spaces (e.g., `chd cue bin iso`). Leave blank to scan all file types (use with caution).
+6.  **Scan Recursively:** Keep this ON if your games are in subfolders.
+7.  **Start Scan:** Scroll down and select `Start Scan`.
+8.  **Repeat:** Repeat the manual scan process for other folders with common file types.
+
+## 7. Downloading Thumbnails (Box Art)
+
+1.  **Navigate:** Go to `Main Menu > Online Updater`.
+2.  **Select Playlist Thumbnails Updater:** Scroll down and choose `Playlist Thumbnails Updater`.
+3.  **Choose Playlist:** Select the playlist (system) for which you want to download thumbnails.
+4.  **Wait:** RetroArch will download the associated box art/thumbnails.
+
+## 8. Basic Customization (Optional)
+
+### 8.1. Changing the Menu Theme (Driver)
+
+1.  **Navigate:** Go to `Settings > Drivers > Menu`.
+2.  **Select Driver:** Choose a different menu driver (e.g., `ozone`, `xmb`).
+3.  **Save Configuration:** Go to `Main Menu > Configuration File > Save Current Configuration`.
+4.  **Restart RetroArch:** Go to `Main Menu > Quit RetroArch` and relaunch it.
+
+### 8.2. Changing Theme Colors
+
+1.  **Navigate:** Go to `Settings > User Interface > Appearance`.
+2.  **Select Color Theme:** Choose `Menu Color Theme` and select a preset color scheme.
+3.  **Save Configuration:** Go to `Main Menu > Configuration File > Save Current Configuration`.
+
+### 8.3. Changing Quick Menu Hotkey
+
+The default combo (Start + Select/View) can be inconvenient.
+
+1.  **Navigate:** Go to `Settings > Input > Hotkeys`.
+2.  **Set Combo:** Scroll down to `Menu Toggle Controller Combo` and select your desired button combination (e.g., L3 + R3).
+3.  **Save Configuration:** Go to `Main Menu > Configuration File > Save Current Configuration`.
+
+## 9. Saving Options for Cores that Crash on Close
+
+Some cores may crash when you select "Close Content". To save core options or remaps for these cores:
+
+1.  **Enable Advanced Settings:** Go to `Settings > User Interface` and turn `Show Advanced Settings` ON.
+2.  **Enable Flush Option:** Go back to `Settings > User Interface > Menu Item Visibility > Quick Menu`. Turn `Show 'Save Options on Exit'` ON (or similar wording like 'Flush Options').
+3.  **Save Options In-Game:** While a game is running with the problematic core:
+    *   Open the Quick Menu (using your hotkey).
+    *   Go to `Options > Manage Core Options`.
+    *   Make your changes.
+    *   Instead of "Close Content," look for an option like `Save Options on Exit` or `Flush Options to Disk` in the Quick Menu and select it.
+
+## 10. Troubleshooting & FAQs
+
+**Q) Games crash or show "FAILED TO LOAD CONTENT" when loading from USB.**
+**A)** This is almost always a USB permissions issue. Ensure you have followed the USB setup guide linked in the Prerequisites section *exactly*, specifically the steps for setting "ALL APPLICATION PACKAGES" permissions to "Full Control". Re-run those permission steps if unsure.
+
+**Q) Where do BIOS files go? // Loading a game crashes RetroArch.**
+**A)** Missing BIOS files are a common cause of crashes. Ensure you have the correct BIOS files placed in the appropriate location based on your storage method:
+
+*   **Internal Storage (LocalState):**
+    *   `PCSX2 (PS2):` `LocalAppData\[RetroArch Folder Name]\LocalState\system\pcsx2\bios`
+    *   `Dolphin (GC/Wii):` `LocalAppData\[RetroArch Folder Name]\LocalState\system\Dolphin-emu\` (Copy the entire `Sys` folder from a Dolphin setup here).
+    *   `Most Other Cores:` `LocalAppData\[RetroArch Folder Name]\LocalState\system`
+
+*   **External USB Drive (E:\):**
+    *   `PCSX2 (PS2):` `E:\YourBiosFolder\pcsx2\bios` (Set `Settings > Directory > System/BIOS` to `E:\YourBiosFolder`)
+    *   `Dolphin (GC/Wii):` `E:\YourBiosFolder\Dolphin-emu\` (Copy the entire `Sys` folder here. Set `Settings > Directory > System/BIOS` to `E:\YourBiosFolder`).
+    *   `Most Other Cores:` `E:\YourBiosFolder` (Set `Settings > Directory > System/BIOS` to `E:\YourBiosFolder`)
+
+    *(Replace `YourBiosFolder` with the actual name of the folder you created on your USB drive to store BIOS files).*
+
+## 11. Support
+
+For further assistance or specific issues not covered here, please direct your questions to the `#support` channel within Revives Community Server.
+
+*   **Xbox Emulation Hub:** [https://discord.gg/WCmxvvxHqu](https://discord.gg/WCmxvvxHqu)
+*   **Revives Community Server:** [https://discord.gg/28SbncgDy5](https://discord.gg/28SbncgDy5)
+
+---
+*Guide originally written by Mango (Mango3714)*
+*Proof-read by MewLew and ReviveMe*

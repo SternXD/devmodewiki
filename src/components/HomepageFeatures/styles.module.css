@@ -1,0 +1,16 @@
+.features {
+  display: flex;
+  align-items: center;
+  padding: 4rem 0;
+  width: 100%;
+  background: var(--ifm-background-color);
+}
+
+.featureSvg {
+  height: 200px;
+  width: 200px;
+}
+
+.features .container {
+  max-width: 1000px;
+}

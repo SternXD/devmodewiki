@@ -1,0 +1,123 @@
+---
+sidebar_position: 3
+title: UWP Development Notes and Tips (Xbox) - worleydl
+description: Comprehensive guide for porting and developing UWP applications for Xbox
+---
+
+# UWP Development Notes and Tips (Xbox) - [worleydl](https://github.com/worleydl)
+
+These notes provide guidance and tips for developing Universal Windows Platform (UWP) applications, particularly for deployment to an Xbox Series S/X in Developer Mode.  They cover various aspects, including DLL dependencies, MinGW, OpenGL, SDL, and general UWP considerations.
+
+## Getting Started
+
+1.  **Clone Project:** Clone the target project's source code repository.
+2.  **Review Build Config:** Examine the existing build configuration (e.g., CMakeLists.txt, Visual Studio project files) to understand how the project is structured and built.
+3.  **Multithreaded DLL Runtime:** Configure all project components to use the **Multithreaded DLL** runtime library (`/MD` or `/MDd` in Visual Studio).  *Do not use the Multithreaded (/MT) runtime*.  `/MT` is incompatible with UWP.  All components *must* use the same runtime library.  This setting is typically found in the project properties under "C/C++" -> "Code Generation" -> "Runtime Library".
+
+__NOTE__: It's been discovered you can utilize DLL's built with `/MT` with limited success.
+
+## DLL Dependencies
+
+*   **WINRT Compatibility:** DLL dependencies often need to be built specifically for Windows Runtime (WINRT), the underlying technology of UWP.  You can experiment by replacing non-WINRT DLLs one at a time to see if they cause issues.
+
+*   **Dependency Analysis:**
+    *   **`dumpbin`:** If you encounter problems with dependent DLLs, use the `dumpbin` utility (available in a Visual Studio Developer Command Prompt) to analyze your executable and DLLs:
+
+        ```bash
+        dumpbin /DEPENDENTS [your_executable_or_dll.exe/dll]
+        ```
+
+        This command lists the DLLs that a given executable or DLL depends on.
+    *   **Loader Snaps (gflags):** For more detailed debugging information during local debugging, use the `gflags` utility (Global Flags Editor):
+        1.  Run `gflags`.
+        2.  Go to the "Image File" tab.
+        3.  Enter the *full name* of your executable (e.g., `uwp-project.exe`).
+        4.  Check the box labeled "Show loader snaps".
+        5.  Click "OK".
+
+        This will cause the debugger to output detailed information about DLL loading, which can help pinpoint issues.
+
+*   **`VCRUNTIME140.dll` vs. `VCRUNTIME140_APP.dll`:** Pay *close attention* to the output of `dumpbin`.  Your UWP components *should* depend on `VCRUNTIME140_APP.dll` (note the `_APP` suffix).  If you see a dependency on `VCRUNTIME140.dll` (without `_APP`), it indicates a problem. The component is likely not built for UWP and will cause runtime errors on the Xbox.
+
+### The MinGW Solution
+
+*   **Runtime Compatibility:** Standard x64 DLLs built with Visual Studio often have runtime library conflicts in UWP.  MinGW (Minimalist GNU for Windows) projects, however, typically include their own runtime DLLs, which can circumvent these issues.  If you encounter problems with a Q"native" Visual Studio UWP project, consider using MinGW-compiled libraries or building the problematic components with MinGW.
+
+### Loading Restrictions
+
+*   **DLL Load Paths:** UWP applications on Xbox have restricted DLL loading paths.  DLLs can typically only be loaded from:
+    *   The application package itself (where your executable is).
+    *   The `LocalState` folder (used for application data).
+    *   Loading DLLs from the external drive (`E:\`) does *not* appear to be supported.
+
+### CMake Dependencies
+
+*   **WINRT Configuration:** If your project uses CMake and has dependencies with CMake configurations, you can configure them for WINRT using the following command:
+
+    ```bash
+    cmake -S . -B build -G "Visual Studio 17 2022" -DCMAKE_SYSTEM_NAME=WindowsStore -DCMAKE_SYSTEM_VERSION=10.0
+    ```
+
+    *   `-S .`: Specifies the source directory (current directory).
+    *   `-B build`: Specifies the build directory (creates a `build` folder).
+    *   `-G "Visual Studio 17 2022"`: Specifies the generator (Visual Studio 2022).
+    *   `-DCMAKE_SYSTEM_NAME=WindowsStore`: *Crucially*, this sets the target system to Windows Store (UWP).
+    *   `-DCMAKE_SYSTEM_VERSION=10.0`: Specifies the Windows SDK version (10.0 is a common base version).
+
+    You can then open the generated `.sln` file in the `build` folder or use CMake to build the project.  Use these built libraries/DLLs as replacements for existing x64 libraries/DLLs in your main UWP project.
+
+## OpenGL Projects
+
+1.  **Mesa-UWP:**
+    *   Obtain and build/install `aerisarns mesa-uwp` project: (https://github.com/aerisarn/mesa-uwp). This provides a UWP-compatible OpenGL implementation.  Follow the project's README instructions carefully.
+
+2.  **Include DLLs:** In your final UWP application package, include the following DLLs (from the Mesa build):
+    *   `libgallium_wgl.dll`
+    *   `libglapi.dll`
+    *   `opengl32.dll`
+    *   `z-1.dll` (likely a zlib dependency)
+    * Place these DLLs alongside your application's executable.
+
+3.  **Link `opengl32.lib`:** If you are *not* using SDL or GLFW, you may need to explicitly link against `opengl32.lib` in your UWP project's linker settings.
+
+4.  **SDL (Optional):** For SDL projects:
+    *   Obtain and build `aerisarns` fork of SDL (https://github.com/aerisarn/SDL-uwp-gl).  Build the WinRT project within the SDL solution.
+    *   Include `SDL2.lib` in your UWP project's linker settings (Additional Dependencies).
+    *   Include `SDL2.dll` in your application package (alongside your executable).
+
+## SDL Notes
+
+*   **Unexpected Keyboard:** If you encounter unexpected keyboard behavior, check for calls to `SDL_StartTextInput` in your code. This function can sometimes cause issues.
+
+## MinGW Projects
+
+*   **DLL/Implib Creation:** Modify the MinGW makefile to produce a DLL (`.dll`) and an import library (`.lib`).
+
+*   **`cv2pdb`:** Consider using `cv2pdb` (Link unavailable - search for "cv2pdb github") to enable debugging MinGW code within Visual Studio.
+
+*   **UWP Compatibility:** MinGW libraries *tend* to be more UWP-friendly, but for SDL, you *must* configure the MinGW project to link against `aerisarn's` SDL fork (specifically, the VisualC-WinRT build).
+
+*   **Modifying the Makefile:**
+    1.  **Find Executable Build:** Locate the section in the makefile where the main executable is built.
+    2.  **Add Flags:** Add these flags to the linker command:
+        *   `-shared`: Creates a shared library (DLL).
+        *   `-Wl,--out-implib=$(B)/lib$(CLIENTBIN).lib`: Creates an import library (`.lib` file) that you can link against in your Visual Studio project.  `$(B)` and `$(CLIENTBIN)` are likely makefile variables; adjust as needed.
+    3.  **Change Extension:** Find where the final executable is named and change its extension from `.exe` to `.dll`.
+
+## Standard UWP Considerations
+
+*   **Direct3D SwapChain:** For Direct3D projects, you'll need to modify the swap chain creation.  Use `CreateSwapChainForCoreWindow` instead of other swap chain creation methods.  This is specific to UWP and its windowing model.
+
+*   **File I/O:**
+    *   **LocalState:** Provide hints to your application about the location of the `LocalState` folder, which is where UWP applications can save data.  Use this code to get the path:
+
+        ```c++
+        winrt::to_string(winrt::Windows::Storage::ApplicationData::Current().LocalFolder().Path());
+        ```
+    *   **External Drive:** The external drive on Xbox is mapped to `E:\`.  You can use this path directly if you need to load files from a USB drive (although, as mentioned earlier, loading DLLs from `E:\` is not supported).
+
+*   **Static Library Approach:** If you don't have a pre-existing UWP entry point, consider changing the main executable project to a static library (`.lib`).  Then, create a *new* UWP project in Visual Studio and link against this static library. This can simplify the process and avoid errors related to switching an existing project to UWP.
+
+*   **Linker Dependencies:** Every third-party dependency (`.lib` file) linked against in the original main executable *often* needs to be linked against in the UWP executable as well.  If you see "unresolved external symbol" errors during linking, add the missing `.lib` files to your UWP project's linker settings ("Additional Dependencies").
+
+*   **`onecore.lib` and `windowsapp.lib`:**  As a last resort for unresolved external symbol errors, try linking against `onecore.lib` and/or `windowsapp.lib`. These libraries provide core Windows APIs. Add them to your UWP project's linker settings.

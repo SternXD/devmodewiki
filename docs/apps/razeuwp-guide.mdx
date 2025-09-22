@@ -1,0 +1,162 @@
+---
+sidebar_position: 4
+title: RazeUWP Setup Guide
+description: Complete guide for installing and setting up RazeUWP Build engine port on Xbox
+---
+
+# RazeUWP Setup by MewLew
+
+This guide explains how to set up Raze, a source port for Build engine games (like Duke Nukem 3D, Blood, Shadow Warrior), on an Xbox Series S/X in Developer Mode.  It covers both external (USB drive) and internal (console storage) installation methods, including game file placement and modding.
+
+## Prerequisites
+
+*   **Premade USB Folder:** Download the premade USB folder from this Discord link: [https://discord.com/channels/1024833470020722760/1223422209431834684](https://discord.com/channels/1024833470020722760/1223422209431834684).  This folder contains a pre-structured `Raze` folder and a preconfigured `raze_portable.ini` file.
+*   **Game Files:** You will need the original game files for the games you want to play (e.g., `DUKE3D.GRP`, `BLOOD.RFF`). These are *not* included in the premade folder.
+*   **Raze:** You'll need to install the Raze application via the Xbox Dev Portal (instructions for accessing the Dev Portal are assumed to be known).
+*	**(Optional) Mod Files:** If you intend to use mods, you should have them downloaded and ready to go.
+
+## External Drive Setup
+
+This method uses a USB drive to store game files, mods, and the Raze configuration.
+
+### 1. Prepare the External Drive
+
+1.  **Extract the Premade Folder:** Extract the downloaded premade USB folder.  You should have a folder named `Raze`.
+
+2.  **Locate Game Folders:** Open the `Raze` folder.  Inside, you'll find subfolders for supported games (e.g., `Blood`, `Duke3D`, `Redneck`, `SW` for Shadow Warrior).
+
+3.  **Check Required Files:** Inside *each* game folder, you'll find a `.txt` file that lists the required game files.  For example, the `Blood` folder's `.txt` file would list files like:
+    *   `blood.ini`
+    *   All `.rff` files
+    *   All `.art` files
+    *   All `.dat` files
+    *   All `.smk` files
+    *   (Optional) Music files
+
+4.  **Copy Game Files:** Copy the required game files from your game installations *into the corresponding game folders* within the `Raze` folder.
+
+5.  **Move `Raze` Folder to Root:** Drag the entire `Raze` folder to the *root directory* of your USB drive (e.g., `E:\Raze`).
+
+### 2. Initial Raze Setup
+
+1.  **Install Raze:** Install the Raze application via the Xbox Dev Portal.
+2.  **Launch Raze (Once):** Launch Raze *once* on your Xbox.  This initializes necessary folders.  You can exit Raze after this initial launch.
+3. **Upload preconfigured ini:** Open the **Dev Portal** on your PC. Navigate to `LocalAppData > Raze > Localstate` and delete the existing `raze_portable.ini` file. Upload the `raze_portable.ini` file from the extracted `Raze` folder, to the `LocalState` folder.
+
+### 3. Connect and Launch
+
+1.  **Eject and Connect:** Safely eject the USB drive from your PC and connect it to your Xbox.
+
+2.  **Launch Raze:** Launch the Raze application on your Xbox.
+
+    *   **Single Game:** If only one game folder with the correct files is present, that game will load automatically.
+    *   **Multiple Games:** If multiple game folders are set up correctly, a basic menu will appear.
+        *   Use **B** to scroll (if more than six games).
+        *   Use **A** to select a game.
+
+### 4. Modding (External Drive)
+
+1.  **Create Mods Folder:** Inside the `Raze` folder on your USB drive, create a new subfolder named `Mods`.
+
+2.  **Copy Mod Files:** Copy your mod files (e.g., `.grp` or `.zip` files) into the `Mods` folder.  Example: `E:\Raze\Mods\MyMod.grp`.
+
+3.  **Locate the INI File:**  Using the **Dev Portal** on your PC, navigate to `LocalAppData > Raze > Localstate` and download the `raze_portable.ini` file.
+
+4.  **Edit the INI File:**
+    *   Open `raze_portable.ini` in a text editor (like Notepad).
+    *   Find the section for the specific game you want to mod (e.g., `[Duke.Autoload]` for Duke Nukem 3D).
+    *   Add a `Path=` line for each mod, specifying the *full path* to the mod file on your USB drive.  Examples:
+
+    ```ini
+    [Duke.Autoload]
+    Path=E:\Raze\Mods\Metro.grp
+
+    [Blood.Autoload]
+    Path=E:\Raze\Mods\Blood_Graphics_AIO.zip
+    ```
+
+5.  **Save and Reupload:** Save your modified `raze_portable.ini` to your PC, then using the **Dev Portal**, upload and replace the `raze_portable.ini` back into the `LocalState` folder on your Xbox.
+
+6.  **Launch and Play:** Launch Raze; your mods should be loaded for the specified game.
+
+## Internal Setup
+
+This method uses the Xbox's internal storage for all files.
+
+### 1. Prepare the Game Files
+
+1.  **Extract Premade Folder:** Extract the downloaded premade USB folder.  You should have a folder named `Raze`.
+
+2.  **Locate Game Folders:** Open the `Raze` folder and find the game-specific subfolders (e.g., `Blood`, `Duke3D`).
+
+3.  **Check Required Files:**  As with the external method, check the `.txt` file inside each game folder to see the list of required files.
+
+4.  **Copy Game Files:** Copy the necessary game files from your game installations into their corresponding folders within the `Raze` folder.
+
+5. **Create zip file of game folders:** Once all files are correctly in place, select *all of the game folders* and compress them into a single `.zip` file.
+
+### 2. Configure Saves Directory
+
+1.  **Open INI File:**  Open the `raze_portable.ini` file (from the extracted `Raze` folder) in a text editor.
+2.  **Modify `save_dir`:** Find the line that says `save_dir=E:\Raze\Saves`.  Change this line to:  `save_dir=Saves`
+3.  **Save:** Save the changes to the `raze_portable.ini` file.
+
+### 3. Initial Raze Setup
+
+1.  **Install Raze:** Install the Raze application via the Xbox Dev Portal.
+2.  **Launch Raze (Once):** Launch Raze *once* to initialize folders, then exit.
+
+### 4. Upload Files
+
+1.  **Upload INI File:**
+    *   Open the **Dev Portal** on your PC.
+    *   Navigate to: `LocalAppData > Raze > LocalState`.
+    *   *Delete* the existing `raze_portable.ini` file in this location.
+    *   Click "Choose File", select the modified `raze_portable.ini` file (from step 2), and click "Upload".
+
+2.  **Upload Game ZIP:**
+    *   In the Dev Portal, stay in the `LocalAppData > Raze > LocalState` directory.
+    *   Click "Choose File", select the `.zip` file containing your game folders, and click "Upload".
+    *   When prompted, choose **Yes** to automatically unzip the file.
+
+3. **Create Saves Folder:**
+     *   In the Dev Portal, stay in the `LocalAppData > Raze > LocalState` directory.
+     Click **Create new folder** and name it `Saves`.
+
+### 5. Launch and Play (Internal)
+
+1.  **Launch Raze:** Launch the Raze application.
+
+    *   **Single Game:**  If only one game is present, it will load automatically.
+    *   **Multiple Games:** If multiple games are present, a menu will appear.  Use **B** to scroll and **A** to select.
+
+### 6. Modding (Internal)
+
+1.  **Create Mods Folder:** Inside the `LocalState` folder, create a new folder named `Mods`.
+
+2.  **Copy Mod Files:** Copy your mod files (`.grp` or `.zip`) into the `Mods` folder.
+
+3.  **Locate the INI File:**  Using the **Dev Portal** on your PC, navigate to `LocalAppData > Raze > Localstate` and download the `raze_portable.ini` file.
+
+4.  **Edit the INI File:**
+    *   Open `raze_portable.ini` in a text editor.
+    *   Find the section for the game you want to mod (e.g., `[Duke.Autoload]`).
+    *   Add a `Path=` line for each mod, specifying the *relative* path from the `LocalState` folder.  Examples:
+
+    ```ini
+    [Duke.Autoload]
+    Path=Mods\Metro.grp
+
+    [Blood.Autoload]
+    Path=Mods\Blood_Graphics_AIO.zip
+    ```
+
+5. **Save and Reupload:** Save your modified `raze_portable.ini` to your PC, then using the **Dev Portal**, upload and replace the `raze_portable.ini` back into the `LocalState` folder on your Xbox.
+
+6.  **Launch and Play:** Launch Raze, and your mods should be loaded.
+
+## Video Tutorial
+
+Prefer a visual guide?  Check out this tutorial by Revive: [https://youtu.be/odxBpuR9Yog?si=jEhClUgETnuSLTqR](https://youtu.be/odxBpuR9Yog?si=jEhClUgETnuSLTqR)
+
+This guide should help you get Raze running with your favorite Build engine games and mods on your Xbox in Developer Mode!
