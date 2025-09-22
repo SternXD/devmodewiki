@@ -1,0 +1,100 @@
+---
+sidebar_position: 2
+title: Building DolphinUWP from Source - Stern & SirMangler
+description: Complete guide for building DolphinUWP from source for Xbox deployment
+---
+
+# Building DolphinUWP from Source - Stern & SirMangler
+
+This guide explains how to build the UWP (Universal Windows Platform) version of the Dolphin emulator from source code, targeting deployment to an Xbox Series S/X in Developer Mode.  It combines information from SirMangler's Discord and the XBSX2 building guide.  *Note: Success is not guaranteed, as build processes can change.*
+
+## Prerequisites
+
+*   **Windows PC:** You'll need a Windows PC with sufficient storage and processing power.
+*   **Xbox in Developer Mode:** Your Xbox must be in Developer Mode.
+*   **Network Connection:**  Both your PC and Xbox should be on the same network for remote deployment.
+
+## Step 1: Install Visual Studio 2022 Community
+
+This section is identical to the previous guide, but included here for completeness.
+
+1.  **Download:** Go to [https://visualstudio.microsoft.com/downloads/](https://visualstudio.microsoft.com/downloads/) and download the "Community 2022" edition (free).
+2.  **Run Installer:** Run the downloaded installer.
+3.  **Install Community:**  Select "Visual Studio Community 2022" and click "Install".
+4.  **Workloads:** When prompted, select these workloads:
+    *   **Crucially:**  **"Universal Windows Platform development"**.  This includes the Windows 11 SDK (or latest) and Windows App Runtime.
+    *   **(Optional but Recommended):**  **"Desktop development with C++"**.  Dolphin is primarily a C++ project.
+    *   **(Optional):**  ".NET desktop development" (if you need it for other projects).
+5.  **Individual Components:** (Optional, but good practice).  Click the "Individual components" tab and ensure these are checked:
+    *   **C++ (v143) Universal Windows Platform tools** (latest version)
+    *   **C++ (v142) Universal Windows Platform tools** (older version, for compatibility)
+        *   Note, the workload in step 4 should include most, if not all, of the UWP tools.
+6.  **Install Git:** Download and install Git for Windows: [https://git-scm.com/downloads](https://git-scm.com/downloads).  Accept the default installation options unless you have specific preferences. This installs Git Bash, which we will use.
+
+## Step 2: Clone the Dolphin Repository
+
+1.  **Choose a Location:** Decide where you want to store the Dolphin source code on your PC (e.g., `C:\DolphinSource`).  Create this folder.
+
+2.  **Open Git Bash:** Navigate to the folder you chose in File Explorer.  Right-click inside the folder and select "Git Bash Here". This opens a Git Bash terminal window in that directory.
+
+3.  **Clone the Repository:**  In the Git Bash terminal, run the following command *exactly* as shown:
+
+    ```bash
+    git clone -b master --recurse-submodules https://github.com/SternXD/dolphin
+    ```
+
+    *   `-b master`:  This specifies that you want to clone the `master` branch, which contains the UWP-specific code.  *This is critical.*
+    *   `--recurse-submodules`:  This ensures that all necessary submodules (external libraries used by Dolphin) are also downloaded.  *This is also critical.*
+    *   `https://github.com/SternXD/dolphin`:  This is the URL of Stern's fork of the Dolphin repository, which contains the UWP port.
+
+4.  **Wait:** The cloning process will take a while, as it downloads the entire source code and submodules.
+
+## Step 3: Open the Project in Visual Studio
+
+1.  **Navigate to Source:** In File Explorer, go to the folder where you cloned the repository (e.g., `C:\DolphinSource`).  Inside, you should find a folder named `dolphin`.  Go into that folder.
+
+2.  **Open Solution:** Find the file named `dolphin-emu.sln` (likely inside a folder called `Source`).  Double-click this file.  This will open the Dolphin solution in Visual Studio 2022.
+
+3.  **Set Build Configuration:** In the Visual Studio toolbar (usually at the top), you'll see a dropdown that probably says "Debug".  Click the dropdown and change it to **"Release"**.  This is important for creating a build suitable for deployment.
+
+4.  **Set Startup Project:**
+    *   In the "Solution Explorer" pane (usually on the right side), you'll see a list of projects within the solution.
+    *   Find the project named **`DolphinWinRT`**.
+    *   Right-click on `DolphinWinRT` and select **"Set as Startup Project"**.
+
+## Step 4: Configure Project Properties
+
+1.  **Open Properties:** Right-click on the `DolphinWinRT` project in the Solution Explorer again and select **"Properties"** (at the bottom of the context menu).
+
+2.  **Debugger Settings:**
+    *   In the Properties window, on the left side, expand "Configuration Properties" and select **"Debugging"**.
+    *   **Debugger to launch:** Change this to **"Remote Machine"**.
+    *   **Machine Name:** Enter the *IP address or hostname* of your Xbox in Developer Mode. You can find this in the Dev Home app on your Xbox. *Do not use "Local Machine"*.
+    * **Authentication Type:** Set to Universal (Unencrypted Protocol).
+
+3.  **AppxManifest:**
+    *   In the Solution Explorer, under the `DolphinWinRT` project, find and double-click the file named **`Package.appxmanifest`**.  This opens the manifest editor.
+    *   Go to the **"Packaging"** tab.
+    *   **Publisher:** You will need to create a self-signed certificate. Click the **"Choose Certificate..."** button.
+    *   **Create Certificate:** In the "Choose a Certificate" dialog, select **"Create..."**.
+    *   **Enter Publisher Common Name:** Fill in the "Publisher Common Name" field.  It doesn't matter too much what you enter here for a self-signed certificate (e.g., `MyDolphinCert`).
+    *   **Password:**  Enter a password (and remember it!).
+    *   **Click OK:** Click "OK" to create the certificate.
+    *   **Select Certificate:** Back in the "Choose a Certificate" dialog, make sure your newly created certificate is selected and click "OK".
+
+## Step 5: Deploy to Xbox
+
+1.  **Remote Machine:** In the Visual Studio toolbar (where you changed "Debug" to "Release" earlier), there's another dropdown that probably says "Local Machine".  Click this dropdown and select **"Remote Machine"**.  This tells Visual Studio to deploy to your Xbox.
+
+2.  **Start Debugging (Deploy):** Click the green "Play" button (it should now say "Remote Machine" next to it) in the toolbar.  This will:
+    *   **Build the Project:** Compile the DolphinUWP source code into an executable.
+    *   **Deploy to Xbox:** Transfer the built application to your Xbox.
+    *   **Start Debugging:** Launch the application on your Xbox and attach the Visual Studio debugger.
+
+3.  **Wait:** The build and deployment process will take a *significant* amount of time, especially the first time.  Be patient.  You'll see progress in the "Output" window in Visual Studio.
+
+4.  **Authentication:** You may be prompted for your Xbox Developer Mode credentials (username and password) during the deployment process.
+
+5. **Certificate Trust**: You may be prompted to trust the certificate. Choose **Yes**.
+
+If everything goes correctly, DolphinUWP should launch on your Xbox. If you encounter errors, carefully review all the steps, especially the repository cloning (making sure you used the correct branch and submodules), the project properties (remote machine, certificate) Double-check your Xbox's IP address and Developer Mode credentials.

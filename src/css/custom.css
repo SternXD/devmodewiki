@@ -1,0 +1,98 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #2563eb;
+  --ifm-color-primary-dark: #1d4ed8;
+  --ifm-color-primary-darker: #1e40af;
+  --ifm-color-primary-darkest: #1e3a8a;
+  --ifm-color-primary-light: #3b82f6;
+  --ifm-color-primary-lighter: #60a5fa;
+  --ifm-color-primary-lightest: #93c5fd;
+  --ifm-color-secondary: #64748b;
+  --ifm-color-secondary-dark: #475569;
+  --ifm-color-secondary-darker: #334155;
+  --ifm-color-secondary-darkest: #0f172a;
+  --ifm-color-secondary-light: #94a3b8;
+  --ifm-color-secondary-lighter: #cbd5e1;
+  --ifm-color-secondary-lightest: #f1f5f9;
+  --ifm-code-font-size: 95%;
+  --ifm-heading-color: #1e293b;
+  --ifm-font-color-base: #374151;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #3b82f6;
+  --ifm-color-primary-dark: #2563eb;
+  --ifm-color-primary-darker: #1d4ed8;
+  --ifm-color-primary-darkest: #1e40af;
+  --ifm-color-primary-light: #60a5fa;
+  --ifm-color-primary-lighter: #93c5fd;
+  --ifm-color-primary-lightest: #dbeafe;
+  --ifm-color-secondary: #94a3b8;
+  --ifm-color-secondary-dark: #64748b;
+  --ifm-color-secondary-darker: #475569;
+  --ifm-color-secondary-darkest: #334155;
+  --ifm-color-secondary-light: #cbd5e1;
+  --ifm-color-secondary-lighter: #e2e8f0;
+  --ifm-color-secondary-lightest: #f8fafc;
+  --ifm-heading-color: #f1f5f9;
+  --ifm-font-color-base: #e2e8f0;
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.1);
+}
+
+/* Additional custom styles for better homepage appearance */
+.homepage-section {
+  padding: 3rem 0;
+}
+
+.homepage-section h2 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.homepage-section h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--ifm-heading-color);
+}
+
+.homepage-section p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--ifm-font-color-base);
+  margin-bottom: 1.5rem;
+}
+
+.hero-buttons {
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.feature-box {
+  padding: 2rem 1rem;
+  text-align: center;
+  border-radius: 8px;
+  background: var(--ifm-color-secondary-lightest);
+  border: 1px solid var(--ifm-color-secondary-lighter);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] .feature-box {
+  background: var(--ifm-color-secondary-darkest);
+  border: 1px solid var(--ifm-color-secondary-darker);
+}

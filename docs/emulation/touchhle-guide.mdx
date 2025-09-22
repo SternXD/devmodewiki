@@ -1,0 +1,131 @@
+---
+sidebar_position: 6
+title: TouchHLE UWP Setup Guide
+description: Complete guide for installing and setting up TouchHLE iOS emulator on Xbox
+---
+
+# TouchHLE UWP Setup Guide
+
+This guide provides instructions for installing and setting up TouchHLE, an emulator for early iOS applications (iOS 3 and under), on an Xbox Series S/X console running in Developer Mode.
+
+**Important:**
+*   This is a work-in-progress emulator. Compatibility is limited, and many games may not work correctly or at all.
+*   **An External USB Drive is REQUIRED** for this emulator. It is used to store necessary system files and the game itself.
+*   This guide is based on the setup process demonstrated in the referenced video.
+
+## Prerequisites
+
+Before you begin, ensure the following conditions are met:
+
+1.  **Xbox Developer Mode Activated:** Your Xbox Series S/X must be successfully set up and running in Developer Mode.
+2.  **Remote Access Enabled:** Remote Access must be enabled and configured within the Xbox Dev Home application.
+3.  **External USB Drive:** A USB drive formatted as NTFS with full read/write permissions set for UWP applications.
+4.  **PC:** A Windows PC for downloading files and accessing the Xbox Device Portal.
+5.  **iOS Game Files:** Your own legally dumped and **decrypted** iOS game files (`.ipa` format) compatible with iOS 3 or under.
+
+> **Need help with prerequisites?** See the [_Xbox Developer Mode Setup_](/docs/xbox-setup/xbox-developer-mode-setup) guide for detailed instructions on activating Dev Mode, setting up Remote Access, and preparing a USB drive.
+
+## Step 1: Downloading Files
+
+You will need to download two separate packages: the UWP application for the Xbox and the standard PC version to extract necessary files.
+
+### 1.1. Download the TouchHLE UWP App
+
+1.  **Download TouchHLE for Xbox:** See the [Installation](#installation) section below for download instructions.
+2.  **Find TouchHLE:** Navigate to the **"Emulators"** tab and find **"TouchHLE (ALPHA)"**.
+3.  **Download:** Click the **"Download"** button. This downloads a `.zip` file containing the UWP app and dependencies.
+4.  **Extract Files:** On your PC, extract the downloaded `.zip` file. Inside, you should find the main `.msixbundle` or `.appx` file and several dependency `.appx` files.
+
+### 1.2. Download the TouchHLE PC Version (for required assets)
+
+1.  **Download PC Version for Required Files:** Go to the official TouchHLE GitHub releases page: [**https://github.com/touchHLE/touchHLE/releases**](https://github.com/touchHLE/touchHLE/releases).
+2.  **Download the Windows `.zip` file** from the latest stable release (e.g., `touchHLE-vX.X.X-windows_x86_64.zip`).
+3.  **Extract PC Files:** Extract this second `.zip` file to a separate, known location on your PC. We will need files from this folder later.
+
+## Step 2: Install via Device Portal
+
+1.  **Access Dev Portal:** On your PC, open a web browser and connect to your Xbox Device Portal.
+2.  **Bypass Security Warning:** If necessary, bypass the browser's security warning.
+3.  **Navigate to "Add":** Under "My games & apps", click "Add".
+4.  **Upload Main Package:** Click "Choose File" (or drag and drop) and select the TouchHLE `.msixbundle` or `.appx` file from the **UWP download** (Step 1.1).
+5.  **Upload Dependencies:** Click "Next". Add **all** the dependency files from the UWP download one by one.
+6.  **Start Installation:** Click "Start" and wait for completion ("Package successfully registered"). Click "Done".
+
+## Step 3: Configure on Xbox
+
+1.  **Locate TouchHLE in Dev Home:** On your Xbox, go to Dev Home. Find `TouchHLE`.
+2.  **Change Type to "Game":** Highlight the app > Press "View" button > "View details" > Change "App type" to "Game" > Press B.
+3.  **(Recommended) Restart Console:** Select "Restart console" from the Dev Home main menu.
+
+## Step 4: Prepare External USB Drive (CRITICAL)
+
+This step requires placing specific folders and files from the **PC version of TouchHLE** onto your USB drive.
+
+1.  **Connect USB Drive:** Plug your prepared external USB drive into your PC.
+2.  **Create `iOS` Folder:** At the *root* of your USB drive (e.g., `E:\`), create a new folder named exactly `iOS`.
+3.  **Copy Folders to Root:**
+    *   Navigate to the folder where you extracted the **PC version** of TouchHLE (from Step 1.2).
+    *   Find the `touchHLE_dylibs` and `touchHLE_fonts` folders.
+    *   Copy *both* of these folders to the **root** of your USB drive (e.g., to `E:\`).
+4.  **Copy Config Files:**
+    *   Still in the PC version folder, find the `touchHLE_default_options.txt` file.
+    *   Copy this file to the **root** of your USB drive (e.g., to `E:\`).
+    *   Now, find the `touchHLE_options.txt` file.
+    *   Copy this file *into* the `iOS` folder you created on your USB drive (e.g., to `E:\iOS`).
+
+Your USB drive should now have this structure at its root:
+*   `E:\touchHLE_dylibs` (folder)
+*   `E:\touchHLE_fonts` (folder)
+*   `E:\iOS` (folder, containing `touchHLE_options.txt`)
+*   `E:\touchHLE_default_options.txt` (file)
+
+## Step 5: Adding and Launching a Game
+
+The UWP port currently loads games in a specific way.
+
+1.  **Obtain Game:** Get your decrypted iOS game file (`.ipa`). For testing, you can legally download compatible freeware games like "Touch & Go" directly from the **iOS App Archive**: [**https://touchhle.org/app-archive/**](https://touchhle.org/app-archive/).
+2.  **Rename Game File:** You **must** rename your game file to exactly `app.ipa`.
+3.  **Place Game on USB:** Copy the renamed `app.ipa` file to the **root** of your USB drive (e.g., `E:\app.ipa`).
+4.  **Connect and Launch:**
+    *   Safely eject the USB drive from your PC and connect it to your Xbox.
+    *   Launch TouchHLE from the Xbox dashboard.
+5.  **Update Prompt:**
+    *   You may see a "TouchHLE Update Available" prompt. **It is highly recommended to select "NO" for now.**
+6.  **Play:** The game should now launch.
+
+## Step 6: Controls
+
+The controller emulates touch input:
+
+*   **Right Stick:** Moves the touch cursor.
+*   **Right Stick Click (R3) or Right Bumper (RB):** Simulates a screen tap.
+*   **Left Stick:** Simulates device tilt/gyro controls.
+
+## Step 7: Advanced Configuration (e.g., Fullscreen)
+
+You can set per-game options, like forcing fullscreen, by editing `touchHLE_options.txt`.
+
+1.  **Launch Game Once:** Launch the game you want to configure at least once. This generates a log file.
+2.  **Find Game Identifier:**
+    *   Connect the USB drive back to your PC.
+    *   Navigate into the `E:\iOS` folder.
+    *   Open the newly created `touchHLE_log.txt` file.
+    *   Look for a line that starts with `Identifier:`. Copy the full identifier string (e.g., `com.thegamecreators.TouchAndGo`).
+3.  **Edit Options File:**
+    *   Open the `touchHLE_options.txt` file located in `E:\iOS`.
+    *   On a new line, paste the identifier you copied.
+    *   Immediately after the identifier, add a colon (`:`).
+    *   After the colon, add the command-line option you want to use. For fullscreen, use `--fullscreen`.
+    *   The final line should look like this: `com.thegamecreators.TouchAndGo:--fullscreen`
+4.  **Save and Relaunch:** Save the `touchHLE_options.txt` file, connect the USB back to your Xbox, and launch the game. It should now run with the specified options.
+
+> **Tip:** You can find a list of all available options (like `--scale-hack`, controller button mapping, etc.) by looking inside the `OPTIONS_HELP.txt` file included with the **PC version** of TouchHLE.
+
+## Troubleshooting
+
+*   **Game is a tiny window:** The game is not running in fullscreen. Follow **Step 7** to add the `--fullscreen` option for your game's identifier in `touchHLE_options.txt`.
+*   **Game won't launch:**
+    *   Ensure your `.ipa` file is renamed to exactly `app.ipa` and is located at the **root** of your USB drive.
+    *   Verify the game is decrypted and compatible with iOS 3 or under.
+    *   Check that the `touchHLE_dylibs`, `touchHLE_fonts`, and other required files are correctly placed on the USB drive as described in **Step 4**.
+*   **Game layout is broken (e.g., horizontal instead of vertical):** This may happen if you accept the in-app update. For now, it is best to **decline the update** when prompted. If you've already updated, you may need to reinstall the original version from the Dev Store.

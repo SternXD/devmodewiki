@@ -1,0 +1,133 @@
+---
+sidebar_position: 4
+title: How to Compile Mesa for UWP
+description: Complete guide for compiling Mesa graphics library for Universal Windows Platform
+---
+
+# How to Compile Mesa for UWP
+
+This guide provides step-by-step instructions for compiling Mesa for the Universal Windows Platform (UWP). This process requires specific versions of tools and some environment configuration.
+
+---
+
+## 1. Prerequisites
+
+Before you begin, you must install and configure the following software:
+
+## Step 1: Download and Install Visual Studio 2022 Community
+
+1. Visit the [Visual Studio Downloads](https://visualstudio.microsoft.com/downloads/) page.
+2. Under "Community 2022", click the `Free download` button.
+3. Once the installer is downloaded, open it to start the installation process.
+4. In the Visual Studio Installer, select **Visual Studio Community 2022** and click `Install`.
+
+1. When the installer prompts you to select the workloads, check the **Windows application development** workload:
+    - This includes the **Windows 11 SDK**, and **Windows app runtime**.
+
+2. (Optional) You can also select other workloads depending on your needs, such as:
+    - `.NET Desktop Development` for WPF/WinForms applications.
+    - `Desktop development with C++` if you plan to work with C++ Win32 applications.
+
+3. Under the **Individual Components** tab (if needed), ensure the following are checked:
+    - **C++ (v143) Universal Windows Platform tools**
+    - **Universal Windows Platform Tools**
+
+4. Click `Install` to begin the installation process.
+
+* **Git for Windows:**
+    * Download and install Git for Windows: [https://git-scm.com/downloads](https://git-scm.com/downloads). Accept the default installation options unless you have specific preferences.
+* **Python 3.x:** The Meson build system and its dependencies require Python.
+    * Download from the [official Python website](https://www.python.org/downloads/).
+    * **Important:** During installation, make sure to check the box that says **"Add Python to PATH"**.
+* **winflexbison:** A port of Flex and Bison for Windows.
+    * Download the `win_flex_bison-2.5.25.zip` from [this release page](https://github.com/lexxmark/winflexbison/releases/tag/v2.5.25).
+* **Custom Meson Executable:** A specific version of the Meson executable is required for this build.
+    * Download the `meson.exe` from [this release page](https://github.com/SternXD/meson/releases/tag/1.3.99).
+* **Required Python Packages:** You'll need to install a few packages using Python's package manager, pip.
+    * `pyyaml`
+    * `packaging`
+    * `setuptools`
+    * `mako`
+
+---
+
+## 2. Environment Setup
+
+Follow these steps carefully to set up your build environment.
+
+### Step 1: Install Python and Pip Packages
+
+1.  Install Python if you haven't already, ensuring it's added to your system's PATH.
+2.  Open a **PowerShell** or **Windows Terminal** window.
+3.  Install the required packages by running the following command:
+    ```powershell
+    pip3 install pyyaml packaging setuptools mako
+    ```
+
+### Step 2: Prepare Tools Directory
+
+1.  Create a new folder on your C: drive named `C:\uwp_tools`.
+2.  Download `meson.exe` and place it directly inside `C:\uwp_tools`.
+3.  Extract the contents of the `win_flex_bison-2.5.25.zip` file you downloaded into the `C:\uwp_tools` folder. This will create a subfolder, and the path to the executables should be `C:\uwp_tools\win_flex_bison-2.5.25\`.
+
+### Step 3: Update Environment Variables
+
+To allow the system to find `meson`, `flex`, and `bison` from any command line, you need to add their locations to the PATH.
+
+1.  Press `Win + S` and search for "Edit the system environment variables".
+2.  Click the "Environment Variables..." button.
+3.  In the "System variables" section, find and select the `Path` variable, then click "Edit...".
+4.  Click "New" and add the path: `C:\uwp_tools`
+5.  Click "New" again and add the path: `C:\uwp_tools\win_flex_bison-2.5.25`
+6.  Click OK to close all windows. You may need to restart your PowerShell or Windows Terminal for the changes to take effect.
+
+---
+
+## 3. Cloning the Mesa-UWP Repository
+
+1.  Open a new **PowerShell** or **Windows Terminal** window.
+2.  Navigate to the directory where you want to store the project (e.g., `C:\dev`).
+3.  Clone the repository using one of the following commands:
+
+Dev:
+    ```powershell
+    git clone -b uwp-main https://github.com/SternXD/mesa-uwp.git
+    ```
+
+Stable:
+		```powershell
+    git clone -b uwp-25.2.0 https://github.com/SternXD/mesa-uwp.git
+    ```
+
+---
+
+## 4. Compilation Process
+
+1.  Open a new **PowerShell** or **Windows Terminal** window.
+
+2.  Navigate to the `mesa-uwp` directory you cloned earlier.
+    ```powershell
+    cd C:\dev\mesa-uwp
+    ```
+3.  **Setup the build.** Run the Meson setup command to generate the build files. This command creates a new directory named `build_release`.
+    * **For PowerShell:** (Note the backticks \` for line continuation)
+		```powershell
+		meson setup build_release --wipe --backend=vs --uwp --buildtype=release `
+		--prefix="C:\mesa_build" `
+		-Dcpp_std=vc++17 `
+		-Dc_args="-D_XBOX_UWP" `
+		-Dcpp_args="-D_XBOX_UWP" `
+		-Db_pch=false `
+		-Dc_winlibs="" `
+		-Dcpp_winlibs=""
+		```
+3.  **Compile the project.** Use the Meson compile command, pointing it to your build directory.
+    ```powershell
+    meson compile -C build_release
+    ```
+4.  **Install the compiled files.** This final step will copy the resulting libraries to your selected prefix e.g. `C:\mesa_build`
+    ```powershell
+    meson install -C build_release
+    ```
+
+Then it should all be done. By default, the final, usable files will be placed in `C:\mesa_build` (if you selected that for your prefix)  in the `bin`, `include`, `lib`, and `share` directories.

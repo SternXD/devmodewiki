@@ -1,0 +1,111 @@
+---
+sidebar_position: 3
+title: Building Xenia Canary (UWP) from Source - Stern & SirMangler
+description: Complete guide for building Xenia Canary UWP from source for Xbox deployment
+---
+
+# Building Xenia Canary (UWP) from Source - Stern & SirMangler
+
+This guide provides instructions for compiling the `canary_experimental` branch of Xenia, an Xbox 360 emulator, from source code, targeting a UWP (Universal Windows Platform) build suitable for deployment to an Xbox Series S/X in Developer Mode.  *Note: This process is based on information from SirMangler's Discord and may be subject to change. Success is not guaranteed.*
+
+## Prerequisites
+
+*   **Windows PC:** A Windows PC with sufficient storage and processing power.
+*   **Visual Studio 2022:**  Visual Studio 2022 (Community, Professional, or Enterprise) *with the necessary UWP and C++ workloads and components installed*.  See the previous "Installing Visual Studio 2022" guide for detailed instructions. It is *highly recommended* that you install the "Desktop Development with C++" workload.
+*   **Git:** Git for Windows installed (see the previous Visual Studio guide).
+*   **Xbox in Developer Mode:**  Your Xbox Series S/X must be in Developer Mode.
+*   **Network Connection:** Both your PC and Xbox should be on the same network.
+
+## Steps
+
+1.  **Clone the Repository:**
+    *   Choose a location on your PC to store the Xenia source code (e.g., `C:\XeniaSource`). Create this folder.
+    *   Open Git Bash: Navigate to the chosen folder in File Explorer, right-click inside the folder, and select "Git Bash Here".
+    *   Run the following command in the Git Bash terminal:
+
+        ```bash
+        git clone -b canary_experimental --recursive https://github.com/SirMangler/xenia.git
+        ```
+
+        *   `-b canary_experimental`: This clones the `canary_experimental` branch, which is the actively developed UWP branch.  *This is crucial*.
+        *   `--recursive`: This ensures that all submodules (external libraries) are also downloaded. *This is also crucial*.
+        *   `https://github.com/SirMangler/xenia.git`:  This is the URL of SirMangler's fork of Xenia.
+
+    *   Change Directory:  After the cloning is complete, use the following command in Git Bash to navigate *into* the newly created `xenia` folder:
+
+        ```bash
+        cd xenia
+        ```
+        You must be *inside* the `xenia` folder for the next steps.
+
+2.  **Run Setup Commands:**
+    *   In the *same* Git Bash terminal (now inside the `xenia` folder), run these two commands, one after the other:
+
+        ```bash
+        ./xb devenv
+        ./xb premake
+        ```
+
+        These commands set up the development environment and generate project files.  You may see output (possibly including warnings or errors) in the terminal; this is normal as long as the commands complete.
+
+3.  **Open the Solution:**
+    *   Navigate to the `xenia` folder in File Explorer (e.g., `C:\XeniaSource\xenia`).
+    *   Find the file named `xenia.sln` (or similar, depending on your setup).  Double-click this file to open the Xenia solution in Visual Studio 2022.
+
+4.  **Add `xenia-canary-uwp` to the Solution:**
+     *  This project is *not* automatically included, so you have to add manually.
+     * In Visual Studio go to **File -> Add -> Existing Project**.
+     * Navigate to the folder where you cloned the repository. Select the project located in `xenia\src\xenia-canary-uwp`.
+
+5.  **Set Startup Project:**
+    *   In the Solution Explorer (usually on the right), find the project named `xenia-canary-uwp`.
+    *   Right-click on `xenia-canary-uwp` and select **"Set as Startup Project"**.
+
+6.  **Set Build Configuration:**
+    *   In the Visual Studio toolbar, change the build configuration from "Debug" to **"Release"**.
+    *   Also in the toolbar, change the architecture from "x86" (or whatever it's set to) to **"x64"**. Xenia UWP requires x64.
+
+7.  **(Potentially Optional) Compile the Entire Solution:** The original guide suggests compiling the entire solution at this point. Try this first. If it doesn't work, skip to step 9 and then, try building the solution again.
+
+8.  **Remove `file_picker.win.cc`:**
+    *   In the Solution Explorer, expand the `xenia-canary-uwp` project.
+    *   Find a file named `file_picker.win.cc`.  It's likely within a "Source Files" or similar filter.
+    *   Right-click on `file_picker.win.cc` and select **"Remove"**.  Confirm the removal.  This file is known to cause build issues.
+
+9. **(Conditional) `zstd` Issues (If Step 7 Fails):**  If you encounter build errors related to `zstd` (a compression library), follow these steps:
+
+    *   **Remove `zstd`:** In the Solution Explorer, find the `zstd` project (it's likely at the top level of the solution, not inside `xenia-canary-uwp`).  Right-click on `zstd` and select "Remove".
+    *   **Add Existing `zstd` Project:**
+        *   Right-click on the Solution ('Solution 'xenia'...') at the very top of the Solution Explorer and choose "Add" -> "Existing Project...".
+        *   Navigate to: `third_party/zstd/build/VS2010/zstd/`.
+        *   Select the file `zstd.vcxproj` and click "Open".
+    *   **Retarget `zstd`:**
+        *   Right-click on the newly added `zstd` project in the Solution Explorer.
+        *   Select **"Retarget Projects"**.  This updates the project to use your currently installed Visual Studio version and SDK. A dialog may appear; choose "OK".
+    *   **Add `zstd` Reference to `zarchive`:**
+        *   Find the `zarchive` project in the Solution Explorer.
+        *   Right-click on `zarchive` and select "Add" -> "Reference...".
+        *   In the "Add Reference" dialog, check the box next to `zstd` and click "OK".
+    *   **Remove `zstd.rc`:**  In the Solution Explorer, expand the `zstd` project.  Find the file named `zstd.rc` (likely in "Resource Files").  Right-click on `zstd.rc` and select "Remove".
+
+10. **Build the Project (or Create App Packages):**
+
+    *   **Build:**  You can try building the project directly: Right-click on `xenia-canary-uwp` in the Solution Explorer and select "Build".  This is suitable for debugging.
+    *   **Create App Packages (Recommended for Deployment):**  For deploying to your Xbox, it's recommended to create app packages:
+        *   Right-click on `xenia-canary-uwp` in the Solution Explorer.
+        *   Select "Publish" -> "Create App Packages...".
+        *   Choose "Sideloading" (this is for Developer Mode).
+        *   Follow the prompts. You'll likely need to create or select a signing certificate (similar to the Dolphin UWP build process).
+        *   Select the x64 architecture.
+        *   Choose a location to save the app packages.
+        *   Click "Create".
+
+11. **Deploy to Xbox:** If you created app packages, you can deploy them to your Xbox using the Device Portal (in your web browser) or through Visual Studio's "Remote Machine" deployment option (as described in the Dolphin UWP build guide). You would follow very similar steps as with Dolphin UWP to connect and deploy to the Xbox.
+
+This guide provides the necessary steps, based on the provided information and best practices for UWP development. If you encounter errors, carefully review the steps, paying close attention to:
+
+*   Correct Git commands (branch and submodules).
+*   Project setup (startup project, build configuration, architecture).
+*   File removals (`file_picker.win.cc`, and potentially `zstd.rc`).
+*   `zstd` project retargeting and referencing.
+*   Creating app packages (if applicable).
