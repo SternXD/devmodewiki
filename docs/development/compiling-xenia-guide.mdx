@@ -6,7 +6,11 @@ description: Complete guide for building Xenia Canary UWP from source for Xbox d
 
 # Building Xenia Canary (UWP) from Source - Stern & SirMangler
 
-This guide provides instructions for compiling the `canary_experimental` branch of Xenia, an Xbox 360 emulator, from source code, targeting a UWP (Universal Windows Platform) build suitable for deployment to an Xbox Series S/X in Developer Mode.  *Note: This process is based on information from SirMangler's Discord and may be subject to change. Success is not guaranteed.*
+This guide provides instructions for compiling the `canary_experimental` branch of Xenia, an Xbox 360 emulator, from source code, targeting a UWP (Universal Windows Platform) build suitable for deployment to an Xbox Series S/X in Developer Mode.
+
+:::note
+This process is based on information from SirMangler's Discord and may be subject to change. Success is not guaranteed.
+:::
 
 ## Prerequisites
 
@@ -102,10 +106,13 @@ This guide provides instructions for compiling the `canary_experimental` branch 
 
 11. **Deploy to Xbox:** If you created app packages, you can deploy them to your Xbox using the Device Portal (in your web browser) or through Visual Studio's "Remote Machine" deployment option (as described in the Dolphin UWP build guide). You would follow very similar steps as with Dolphin UWP to connect and deploy to the Xbox.
 
-This guide provides the necessary steps, based on the provided information and best practices for UWP development. If you encounter errors, carefully review the steps, paying close attention to:
+This guide provides the necessary steps, based on the provided information and best practices for UWP development.
 
-*   Correct Git commands (branch and submodules).
-*   Project setup (startup project, build configuration, architecture).
-*   File removals (`file_picker.win.cc`, and potentially `zstd.rc`).
-*   `zstd` project retargeting and referencing.
-*   Creating app packages (if applicable).
+:::note
+If you encounter errors, carefully review the steps, paying close attention to:
+- Correct Git commands (branch and submodules).
+- Project setup (startup project, build configuration, architecture).
+- File removals (`file_picker.win.cc`, and potentially `zstd.rc`).
+- `zstd` project retargeting and referencing.
+- Creating app packages (if applicable).
+:::

@@ -32,7 +32,10 @@ The installation process is divided into three main parts:
 
 2.  **Prepare your 32-bit Application (Example: Space Cadet Pinball):**
     *   This guide uses "Space Cadet Pinball" as an example, but you can use any 32-bit Windows application.
-    *   **CRITICAL:** All files related to your chosen application (the executable file - .exe, along with any necessary .dll files or other supporting files) *must* be compressed together into a single .zip file.  If you have an installer (.msi) or a batch file (.bat), these should also be included in the .zip file.  *This is a mandatory requirement for BoxedWine to function correctly.*
+
+    :::danger
+    All files related to your chosen application (the executable file - .exe, along with any necessary .dll files or other supporting files) *must* be compressed together into a single .zip file.  If you have an installer (.msi) or a batch file (.bat), these should also be included in the .zip file.  *This is a mandatory requirement for BoxedWine to function correctly.*
+    :::
 
 3.  **Create Folder Structure on External Drive:**
     *   Connect your external drive to your PC.
@@ -51,7 +54,11 @@ The installation process is divided into three main parts:
     *   On your Xbox, navigate to the settings for Developer Mode.
     *   Locate and click on "Remote Access Settings".
     *   Enable the option labeled "Xbox Dev Portal".
-    *   **IMPORTANT:**  Take a screenshot or carefully write down the two web addresses (URLs) that are displayed.  These URLs are crucial for accessing your Xbox remotely from your PC.
+
+    :::caution
+    Take a screenshot or carefully write down the two web addresses (URLs) that are displayed.  These URLs are crucial for accessing your Xbox remotely from your PC.
+    :::
+
     *   *Optional (but recommended):* The original tutorial suggests leaving the "Authentication" option (username/password) unchecked. This simplifies access to the portal.
     *   **Keep your Xbox on this settings screen.**
 
@@ -71,7 +78,11 @@ The installation process is divided into three main parts:
     *   The portal will prompt you to "Choose any necessary dependencies".
     *   Click "Choose file" again.
     *   Navigate to the `Dependencies` folder *inside* the extracted `boxwine` folder, and then go into the `x64` folder.
-    *   **CRITICAL:** You must add *all five* dependency files, and you must do it *one by one*. Select each file individually and click "Open" for each one.
+
+    :::danger
+    You must add *all five* dependency files, and you must do it *one by one*. Select each file individually and click "Open" for each one.
+    :::
+
     *   After all five dependencies have been added, click "Start".
 
 5.  **Wait for Installation to Complete:**
@@ -110,7 +121,10 @@ The installation process is divided into three main parts:
 
 5.  **Launch the Application:**
     *   Choose "Launchbox Wine."
-    *   **Important:** The application *will not start immediately*. Proceed to the next step.
+
+    :::caution
+    The application *will not start immediately*. Proceed to the next step.
+    :::
 
 6.  **Run the Application (Critical Steps):**
     *   Within the BoxedWine interface, click the "Start" button (located in the bottom-left corner).
@@ -129,8 +143,16 @@ The installation process is divided into three main parts:
 
 8.  **Input Method:**  The original video mentions that there is *no controller support* at this time.  You *must* use a keyboard. Connect a USB keyboard to interact with your application.
 
-## Troubleshooting and Notes
+## Notes
 
-*   **Compatibility:**  It is important to understand that not all 32-bit applications will be compatible with BoxedWine. The original tutorial suggests creating a compatibility list to track which applications work and which do not.
-*   **Performance:**  As this is an early version of BoxedWine, expect "bugs, stutters, and lags".  You may be able to improve performance by adjusting the frame skip and renderer settings.
-*   **File Structure:**  Adhere strictly to the folder structure and .zip file requirements outlined in this guide.  Deviations may cause the application to fail.
+:::note
+**Compatibility:**  It is important to understand that not all 32-bit applications will be compatible with BoxedWine. The original tutorial suggests creating a compatibility list to track which applications work and which do not.
+:::
+
+:::note
+**Performance:**  As this is an early version of BoxedWine, expect "bugs, stutters, and lags".  You may be able to improve performance by adjusting the frame skip and renderer settings.
+:::
+
+:::note
+**File Structure:**  Adhere strictly to the folder structure and .zip file requirements outlined in this guide.  Deviations may cause the application to fail.
+:::

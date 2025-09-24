@@ -14,7 +14,9 @@ These notes provide guidance and tips for developing Universal Windows Platform 
 2.  **Review Build Config:** Examine the existing build configuration (e.g., CMakeLists.txt, Visual Studio project files) to understand how the project is structured and built.
 3.  **Multithreaded DLL Runtime:** Configure all project components to use the **Multithreaded DLL** runtime library (`/MD` or `/MDd` in Visual Studio).  *Do not use the Multithreaded (/MT) runtime*.  `/MT` is incompatible with UWP.  All components *must* use the same runtime library.  This setting is typically found in the project properties under "C/C++" -> "Code Generation" -> "Runtime Library".
 
-__NOTE__: It's been discovered you can utilize DLL's built with `/MT` with limited success.
+:::note
+It's been discovered you can utilize DLL's built with `/MT` with limited success.
+:::
 
 ## DLL Dependencies
 

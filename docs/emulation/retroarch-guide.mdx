@@ -8,7 +8,9 @@ description: Complete guide for installing and setting up RetroArch on Xbox Deve
 
 This guide provides instructions for installing and setting up RetroArch (Mesa for Xbox Series X|S, Angle for Xbox One) on consoles running in Developer Mode.
 
-**Important:** This guide **ONLY** covers RetroArch Mesa and RetroArch Angle. For the Citra (Nintendo 3DS) core, please refer to the separate `RetroArch Setup Guide (Citra)`.
+:::caution
+This guide **ONLY** covers RetroArch Mesa and RetroArch Angle. For the Citra (Nintendo 3DS) core, please refer to the separate `RetroArch Setup Guide (Citra)`.
+:::
 
 ## 1. Prerequisites
 
@@ -26,7 +28,9 @@ You have a couple of options for getting the RetroArch UWP application:
 
 *   **Xbox Dev Store (Recommended for most users):**
     *   This is the easiest method. See the [Installation](#installation) section below for download instructions.
-    *   **Note:** The versions on the Dev Store (excluding the Citra build) typically *do not* come with cores pre-installed. You will need to download them later using the Online Updater (covered in Step 5).
+    :::note
+    The versions on the Dev Store (excluding the Citra build) typically *do not* come with cores pre-installed. You will need to download them later using the Online Updater (covered in Step 5).
+    :::
 
 *   **Compiling from Source (Advanced Users):**
     *   If you are comfortable compiling software from source code, you can build the latest versions yourself.
@@ -38,7 +42,10 @@ You have a couple of options for getting the RetroArch UWP application:
 Use the Xbox Device Portal to install the RetroArch application package (`.appx` or `.msixbundle`).
 
 1.  **Access Dev Portal:** On your PC or Smartphone, open a web browser and navigate to the Remote Access URL displayed in Dev Home on your Xbox.
-    *   **Note:** This URL can change. Always verify it in Dev Home before connecting.
+
+    :::note
+    This URL can change. Always verify it in Dev Home before connecting.
+    :::
 2.  **Bypass Security Warning:** If your browser shows a security warning ("Your connection is not private"), click "Advanced" and "Proceed" (or the equivalent option). Edge browser typically handles this well.
 3.  **Navigate to "Add":** Under the "My games & apps" section, click "Add".
 4.  **Extract Files:** If you downloaded a `.zip` file, extract its contents on your PC or phone. You should have at least one `.appx` or `.msixbundle` file and potentially a dependency file.
@@ -84,8 +91,14 @@ Once RetroArch is launched, perform these initial setup steps.
 1.  **Navigate:** Go to `Main Menu > Online Updater`.
 2.  **Select Core Downloader:** Choose `Core Downloader`.
 3.  **Download:** Select the desired emulator core from the list and press A to download it. Repeat for all cores you intend to use.
-    *   **Note:** This can only be done *after* running the "Update Core Info Files" option in the previous step.
-    *   **WARNING:** Do **NOT** update `Mupen64Plus-Next`, `ParaLLEl N64`, or `Yabasanshiro` via the Core Downloader if you are using a build specifically configured for ANGLE (typically Xbox One). These builds use modified core versions. Updating them will likely break them. Download them initially, but do not update them later via the Online Updater unless explicitly instructed.
+
+    :::note
+    This can only be done *after* running the "Update Core Info Files" option in the previous step.
+    :::
+
+    :::warning
+    Do **NOT** update `Mupen64Plus-Next`, `ParaLLEl N64`, or `Yabasanshiro` via the Core Downloader if you are using a build specifically configured for ANGLE (typically Xbox One). These builds use modified core versions. Updating them will likely break them. Download them initially, but do not update them later via the Online Updater unless explicitly instructed.
+    :::
 
 ### 5.3. Setting Directories (USB Users)
 
@@ -94,7 +107,9 @@ If you store your games, BIOS files, saves, etc., on an external USB drive, conf
 1.  **Navigate:** Go to `Settings > Directory`.
 2.  **Set Paths:** Select each directory type you want to change (e.g., `File Browser`, `System/BIOS`, `Saves`, `States`).
 3.  **Browse:** Navigate to the corresponding folder on your USB drive (it will appear as the `E:\` drive) and select `<Use This Directory>`.
-4.  **WARNING:** **DO NOT** change the `Core` directory. This will prevent RetroArch from finding your downloaded cores.
+4.  :::warning
+    **DO NOT** change the `Core` directory. This will prevent RetroArch from finding your downloaded cores.
+    :::
 
 ### 5.4. Setting BIOS Directory (Internal/LocalState Users)
 
@@ -117,7 +132,10 @@ This works best for games with unique file extensions or those recognized by Ret
 2.  **Select Game Folder:** Browse to the folder containing your games (e.g., `E:\Games\SNES` on your USB drive or the relevant folder in `LocalState`).
 3.  **Scan:** Select `<Scan This Directory>`.
 4.  **Wait:** RetroArch will scan the folder and attempt to match games to its database, creating a playlist.
-    *   **Note:** You *must* have the corresponding core downloaded *before* scanning, otherwise RetroArch may crash.
+
+    :::note
+    You *must* have the corresponding core downloaded *before* scanning, otherwise RetroArch may crash.
+    :::
 
 ### 6.2. Manual Scan (For Unrecognized Games/Common Extensions)
 
