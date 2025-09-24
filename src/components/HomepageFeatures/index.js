@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2002-2025 SternXD
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';

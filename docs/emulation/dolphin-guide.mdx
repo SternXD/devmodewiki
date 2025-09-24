@@ -8,10 +8,15 @@ description: Comprehensive guide for setting up and using Dolphin UWP on Xbox
 
 This guide provides comprehensive instructions for setting up and using Dolphin UWP, the GameCube and Wii emulator, on an Xbox Series S/X in Developer Mode. It covers initial setup, file transfers, Netplay, optional resources (saves, cheats, textures), troubleshooting, and advanced topics.
 
-**Important Notices (Read Before Proceeding):**
+## Important Notices
 
-*   **Read the Guides:**  Before asking for help, thoroughly read the `#dev-mode-guide` channel (presumably in a Discord server) and the USB tutorial in `#app-guides` if using USB storage.  If you're still stuck, ask for help in `#support`.
-*   **Dolphin PC is Recommended:**  Think of the PC version of Dolphin as an extended settings menu for Dolphin UWP.  While not strictly *required*, Dolphin PC is extremely useful (and sometimes necessary) for many features and configurations.  This guide assumes basic familiarity with Dolphin PC. A powerful PC is *not* required for this.
+:::caution
+**Read the Guides:**  Before asking for help, thoroughly read the `#dev-mode-guide` channel (presumably in a Discord server) and the USB tutorial in `#app-guides` if using USB storage.  If you're still stuck, ask for help in `#support`.
+:::
+
+:::info
+**Dolphin PC is Recommended:**  Think of the PC version of Dolphin as an extended settings menu for Dolphin UWP.  While not strictly *required*, Dolphin PC is extremely useful (and sometimes necessary) for many features and configurations.  This guide assumes basic familiarity with Dolphin PC. A powerful PC is *not* required for this.
+:::
 
 ## Initial Setup - USB (Recommended)
 
@@ -44,7 +49,9 @@ The User Folder is where Dolphin stores important files like:
 
 ## Initial Setup - Internal (Not Recommended)
 
-**WARNING:**  Using internal storage is *strongly discouraged* due to its limitations (30GB) and the risk of undeletable files if the app is uninstalled incorrectly (requiring a factory reset).  However, if you don't have a Windows PC to format a USB drive, this is your only option.
+:::warning
+Using internal storage is *strongly discouraged* due to its limitations (30GB) and the risk of undeletable files if the app is uninstalled incorrectly (requiring a factory reset).  However, if you don't have a Windows PC to format a USB drive, this is your only option.
+:::
 
 ### Adding Games
 
@@ -137,12 +144,21 @@ Netplay allows online multiplayer for GameCube and Wii games with local multipla
     *   **Traversal Code:** If using the Traversal Server, you'll get a code to share with other players.
     *   **IP and Port:** If using Direct Connection, you'll need to share your public IP address and port.
 
-**Notes:**
+:::note
+**Multiple Routers:**  Can cause complications.  You might need to manually find your public IP.
+:::
 
-*   **Multiple Routers:**  Can cause complications.  You might need to manually find your public IP.
-*   **Mixed Connection Types:** You can host on the Traversal Server but allow trusted users (e.g., on your LAN) to connect directly using your IP and port.
-*   **Traversal Server Latency:**  The Traversal Server *does not* add latency; it's only for connecting.
-*   **Host Responsibilities:** The host configures the input buffer, enables/disables features, and assigns controllers.
+:::note
+**Mixed Connection Types:** You can host on the Traversal Server but allow trusted users (e.g., on your LAN) to connect directly using your IP and port.
+:::
+
+:::note
+**Traversal Server Latency:**  The Traversal Server *does not* add latency; it's only for connecting.
+:::
+
+:::note
+**Host Responsibilities:** The host configures the input buffer, enables/disables features, and assigns controllers.
+:::
 
 ### Joining a Netplay Session
 
@@ -574,6 +590,6 @@ The normal Homebrew Channel doesn't boot by default.
 
 2.  **Enjoy:** The modded Super Smash Bros. Brawl should now load.
 
-**Troubleshooting:**
-
+:::note
 If you encounter problems during gameplay, this Discord link provides files to address most common issues: [https://discord.com/channels/1007582798598647889/1092316328821522432/1136120776383287337](https://discord.com/channels/1007582798598647889/1092316328821522432/1136120776383287337). Download these files and place them in your `GameSettings` folder within your Dolphin UWP User Folder. This folder should contain .ini files corresponding to the Game IDs of your games. The troubleshooting files will likely also be .ini files.
+:::

@@ -9,9 +9,12 @@ description: Complete guide for installing and setting up TouchHLE iOS emulator 
 This guide provides instructions for installing and setting up TouchHLE, an emulator for early iOS applications (iOS 3 and under), on an Xbox Series S/X console running in Developer Mode.
 
 **Important:**
-*   This is a work-in-progress emulator. Compatibility is limited, and many games may not work correctly or at all.
-*   **An External USB Drive is REQUIRED** for this emulator. It is used to store necessary system files and the game itself.
-*   This guide is based on the setup process demonstrated in the referenced video.
+
+:::caution
+- This is a work-in-progress emulator. Compatibility is limited, and many games may not work correctly or at all.
+- **An External USB Drive is REQUIRED** for this emulator. It is used to store necessary system files and the game itself.
+- This guide is based on the setup process demonstrated in the referenced video.
+:::
 
 ## Prerequisites
 
@@ -119,7 +122,9 @@ You can set per-game options, like forcing fullscreen, by editing `touchHLE_opti
     *   The final line should look like this: `com.thegamecreators.TouchAndGo:--fullscreen`
 4.  **Save and Relaunch:** Save the `touchHLE_options.txt` file, connect the USB back to your Xbox, and launch the game. It should now run with the specified options.
 
-> **Tip:** You can find a list of all available options (like `--scale-hack`, controller button mapping, etc.) by looking inside the `OPTIONS_HELP.txt` file included with the **PC version** of TouchHLE.
+:::tip
+You can find a list of all available options (like `--scale-hack`, controller button mapping, etc.) by looking inside the `OPTIONS_HELP.txt` file included with the **PC version** of TouchHLE.
+:::
 
 ## Troubleshooting
 

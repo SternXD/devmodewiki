@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2025 SternXD
+// SPDX-License-Identifier: AGPL-3.0
+
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -35,7 +38,7 @@ function HomepageContent() {
         <div className="row">
           <div className="col col--12">
             <div className="text--center">
-              <Heading as="h2">Welcome to the Official Wiki for Dev Store!</Heading>
+              <Heading as="h2">Welcome to the wiki for Dev Mode!</Heading>
 
               <p className="hero__subtitle">
                 Your comprehensive resource for Xbox development, emulation guides, and developer tools.

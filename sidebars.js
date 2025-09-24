@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2025 SternXD
+// SPDX-License-Identifier: AGPL-3.0
+
 /**
  * Creating a sidebar enables you to:
  - create an ordered group of docs
@@ -32,6 +35,7 @@ const sidebars = {
       type: 'category',
       label: 'Emulation Guides',
       items: [
+        'emulation/index',
         'emulation/chonkystation3-guide',
         'emulation/dolphin-guide',
         'emulation/panda3ds-guide',
@@ -58,6 +62,7 @@ const sidebars = {
       type: 'category',
       label: 'Development Guides',
       items: [
+        'development/index',
         'development/compiling-xbsx2-guide',
         'development/compiling-dolphin-guide',
         'development/compiling-xenia-guide',
@@ -68,6 +73,7 @@ const sidebars = {
       type: 'category',
       label: 'Helpful Links',
       items: [
+        'helpful-links/index',
         'helpful-links/xbox-uwp-development',
         'helpful-links/visual-studio-2022-setup',
         'helpful-links/worleydls-uwp-porting-notes',

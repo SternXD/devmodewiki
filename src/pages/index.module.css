@@ -1,7 +1,5 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
+/* SPDX-FileCopyrightText: 2025 SternXD */
+/* SPDX-License-Identifier: AGPL-3.0 */
 
 .heroBanner {
   padding: 4rem 0;

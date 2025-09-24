@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://wiki.sternserv.xyz/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Algolia-Crawler-Verif: F5740BF38387994A
+
+# Specific rules for search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /

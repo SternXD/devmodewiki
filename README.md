@@ -1,8 +1,8 @@
-# Dev Store Wiki
+# Dev Mode Wiki
 
-This is the official GitHub repository for the Dev Store Wiki hosted at <https://wiki.sternserv.xyz/>.
+This is the official GitHub repository for the Dev Mode Wiki hosted at <https://wiki.sternserv.xyz/>.
 
-Dev Store Wiki provides comprehensive documentation for developer tools and resources.
+Dev Mode Wiki provides comprehensive documentation for developer tools and resources.
 
 This project is licensed under the [GNU Affero General Public License](LICENSE).
 
