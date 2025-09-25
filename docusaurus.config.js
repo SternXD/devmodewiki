@@ -14,7 +14,7 @@ import { lazy } from 'react';
 const config = {
   title: 'Dev Mode Wiki',
   tagline: 'Complete Xbox Developer Mode Setup & Emulation Guides',
-  favicon: 'img/favicon.ico', // TBD: favicon
+  favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
   url: 'https://wiki.sternserv.xyz/',
@@ -50,14 +50,14 @@ const config = {
         url: 'https://wiki.sternserv.xyz/',
         title: 'Dev Mode Wiki - Xbox Developer Mode & Emulation Guides',
         description: 'Complete Xbox Developer Mode setup guides, emulation tutorials, and homebrew development resources.',
-        image: 'https://wiki.sternserv.xyz/img/logo.svg',
+        image: 'https://wiki.sternserv.xyz/img/logo.png',
       },
       twitter: {
         card: 'summary_large_image',
         url: 'https://wiki.sternserv.xyz/',
         title: 'Dev Mode Wiki - Xbox Developer Mode & Emulation Guides',
         description: 'Complete Xbox Developer Mode setup guides, emulation tutorials, and homebrew development resources.',
-        image: 'https://wiki.sternserv.xyz/img/logo.svg',
+        image: 'https://wiki.sternserv.xyz/img/logo.png',
       },
     },
   },
@@ -206,7 +206,7 @@ const config = {
         title: 'Dev Mode Wiki',
         logo: {
           alt: 'Dev Mode Wiki Logo',
-          src: 'img/logo.svg',
+          src: 'img/logo.png',
           style: {borderRadius: '10px'},
           width: 32,
           height: 32,
