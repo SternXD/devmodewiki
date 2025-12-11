@@ -2,7 +2,15 @@
 sidebar_position: 5
 title: Sonic Adventure Blast 2 UWP Setup Guide
 description: Complete guide for installing and setting up Sonic Adventure Blast 2 UWP on Xbox
+tags:
+  - apps
+  - sonic
+  - sab2
+  - uwp
+  - xbox
 ---
+
+import AtAGlance from '@site/src/components/AtAGlance';
 
 # Sonic Adventure Blast 2 UWP Setup Guide
 
@@ -11,6 +19,31 @@ This guide provides instructions for installing and setting up the fan-made game
 **Ported By:** WorleyDL
 
 **Important:**
+
+<AtAGlance
+  title="Sonic Adventure Blast 2 (UWP)"
+  summary="Fan port; requires NTFS USB for game data and works on Series X|S only."
+  testedOn="03/25/2025"
+  rows={[
+    { label: 'Dev Mode', value: 'Required' },
+    { label: 'Storage', value: 'NTFS USB required for Settings/res folders' },
+    { label: 'User folder', value: 'USB:\\sab2 with Settings and res at root' },
+    { label: 'Difficulty', value: 'Intermediate — ~15–20 minutes' },
+    { label: 'BIOS/keys', value: 'None' },
+    { label: 'Controllers', value: 'Xbox gamepad; set app type to Game' },
+  ]}
+  works={[
+    'USB root \\sab2\\Settings and \\sab2\\res structure',
+    'Installs via Device Portal with dependency',
+    'Series X|S confirmed support',
+  ]}
+  issues={[
+    'No Xbox One support',
+    'Wrong USB structure prevents launch',
+    'Missing NTFS permissions blocks access',
+  ]}
+  notes="Keep USB plugged in before launch; ensure Settings/res are directly inside \\sab2."
+/>
 
 :::caution
 - This is a fan-made port and is not an official SEGA product.

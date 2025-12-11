@@ -2,12 +2,44 @@
 sidebar_position: 3
 title: LaunchPass Setup Guide
 description: Complete guide for installing and setting up LaunchPass emulator frontend on Xbox
+tags:
+  - apps
+  - launchpass
+  - frontend
+  - uwp
+  - xbox
 ---
+
+import AtAGlance from '@site/src/components/AtAGlance';
 
 # What is LaunchPass?
 
 LaunchPass is a Frontend that is capable of launching ROMs in most Emulators on Xbox One and Series S|X Consoles.
 
+<AtAGlance
+  title="LaunchPass (Frontend)"
+  summary="Frontend for emulators; NTFS USB mandatory for LaunchBox assets."
+  testedOn="11/14/2024"
+  rows={[
+    { label: 'Dev Mode', value: 'Required' },
+    { label: 'Storage', value: 'NTFS USB required for LaunchBox install and ROM paths' },
+    { label: 'User folder', value: 'LaunchBox installed to USB (e.g., E:\\LaunchBox)' },
+    { label: 'Difficulty', value: 'Intermediate — 20–30 minutes' },
+    { label: 'BIOS/keys', value: 'Depends on emulators configured' },
+    { label: 'Controllers', value: 'Xbox gamepad; set app type to App (per guide) for best UX' },
+  ]}
+  works={[
+    'Installs LaunchPass via Device Portal',
+    'LaunchBox to USB keeps assets off internal storage',
+    'Supports multiple emulators via Manage Emulators',
+  ]}
+  issues={[
+    'Wrong NTFS permissions block USB access',
+    'Forgetting to set correct emulator paths breaks launching',
+    'Needs full LaunchBox folder on USB; internal storage is limited',
+  ]}
+  notes="Install LaunchBox to NTFS USB before wiring emulators; double-check app/game type per instructions."
+/>
 ## Requirements Checklist
 
 + **External USB Drive**

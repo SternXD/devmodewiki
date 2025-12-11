@@ -1,0 +1,94 @@
+/* SPDX-FileCopyrightText: 2025 SternXD */
+/* SPDX-License-Identifier: AGPL-3.0 */
+
+.card {
+  border: 1px solid var(--ifm-color-primary-lightest, #e5edff);
+  background: var(--ifm-card-background-color, rgba(255, 255, 255, 0.04));
+  border-radius: 14px;
+  padding: 1.25rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.header {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+  margin-bottom: 0.25rem;
+}
+
+.eyebrow {
+  color: var(--ifm-color-primary);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.summary {
+  margin: 0.2rem 0 0.4rem;
+  color: var(--ifm-color-emphasis-800);
+}
+
+.tested {
+  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-700);
+  margin-bottom: 0.6rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.6rem;
+}
+
+.row {
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 10px;
+  padding: 0.6rem 0.75rem;
+  background: var(--ifm-color-emphasis-0);
+}
+
+.label {
+  display: block;
+  color: var(--ifm-color-emphasis-700);
+  font-weight: 600;
+  margin-bottom: 0.05rem;
+}
+
+.value {
+  color: var(--ifm-color-emphasis-900);
+}
+
+.lists {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.list {
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 10px;
+  padding: 0.7rem 0.9rem;
+  background: var(--ifm-color-emphasis-0);
+}
+
+.listPositive {
+  border-color: rgba(52, 211, 153, 0.4);
+  background: rgba(16, 185, 129, 0.06);
+}
+
+.listTitle {
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.notes {
+  margin-top: 0.75rem;
+  color: var(--ifm-color-emphasis-800);
+}

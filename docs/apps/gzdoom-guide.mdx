@@ -2,11 +2,44 @@
 sidebar_position: 2
 title: GZDoom Setup and Modding Guide
 description: Complete guide for installing and setting up GZDoom Doom engine port on Xbox
+tags:
+  - apps
+  - gzdoom
+  - doom
+  - uwp
+  - xbox
 ---
+
+import AtAGlance from '@site/src/components/AtAGlance';
 
 # GZDoom Setup and Modding on Xbox made by MewLew
 
 This guide explains how to set up GZDoom, a source port of the Doom engine, on an Xbox Series S/X in Developer Mode, including how to install games and mods. It covers both external (USB drive) and internal (console storage) installation methods.
+
+<AtAGlance
+  title="GZDoom (Doom engine)"
+  summary="USB or internal; keep WADs flat and set app type to Game."
+  testedOn="03/09/2025"
+  rows={[
+    { label: 'Dev Mode', value: 'Required' },
+    { label: 'Storage', value: 'USB NTFS recommended; LocalState works for internal' },
+    { label: 'User folder', value: 'USB:\\GZDoom\\Games/Mods or LocalState with Mods folder' },
+    { label: 'Difficulty', value: 'Easy — about 10–15 minutes' },
+    { label: 'BIOS/keys', value: 'None' },
+    { label: 'Controllers', value: 'Xbox gamepad' },
+  ]}
+  works={[
+    'Loads WADs from USB or LocalState',
+    'INI supports global and per-game mod autoload',
+    'Changing app type to Game improves performance',
+  ]}
+  issues={[
+    'Nested folders or zips not extracted block detection',
+    'Missing NTFS permissions on USB prevent access',
+    'Forgetting to set app type to Game can hurt performance',
+  ]}
+  notes="Place WADs/mods flat (no deep nesting); set app type to Game after install."
+/>
 
 ## External Drive Setup
 

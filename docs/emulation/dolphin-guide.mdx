@@ -2,11 +2,44 @@
 sidebar_position: 2
 title: Dolphin UWP Guide
 description: Comprehensive guide for setting up and using Dolphin UWP on Xbox
+tags:
+  - emulation
+  - dolphin
+  - gamecube
+  - wii
+  - uwp
 ---
+
+import AtAGlance from '@site/src/components/AtAGlance';
 
 # Dolphin UWP Guide
 
 This guide provides comprehensive instructions for setting up and using Dolphin UWP, the GameCube and Wii emulator, on an Xbox Series S/X in Developer Mode. It covers initial setup, file transfers, Netplay, optional resources (saves, cheats, textures), troubleshooting, and advanced topics.
+
+<AtAGlance
+  title="Dolphin UWP (GameCube/Wii)"
+  summary="Recommended USB-first setup for Xbox Developer Mode."
+  testedOn="05/05/2025"
+  rows={[
+    { label: 'Dev Mode', value: 'Required (Retail not supported)' },
+    { label: 'Storage', value: 'USB NTFS recommended; internal storage limited and risky to clean' },
+    { label: 'User folder', value: 'USB:\\Dolphin (preferred) or LocalFolder\\[FULLNAME]\\LocalCache\\Dolphin' },
+    { label: 'Difficulty', value: 'Intermediate — about 20–30 minutes (USB method)' },
+    { label: 'BIOS/keys', value: 'None required; optional Wii NAND for menu' },
+    { label: 'Controllers', value: 'Xbox gamepad; custom mappings best synced from PC' },
+  ]}
+  works={[
+    'USB installs when NTFS permissions are set correctly',
+    'Netplay via Traversal server (no port forwarding)',
+    'Custom textures, saves, and Gecko codes via PC sync',
+  ]}
+  issues={[
+    'Internal installs can orphan data if the app is removed',
+    'Strict NAT users may need direct connect + port forwarding for Netplay',
+    'UI lag until cover art caches; USB permissions commonly mis-set',
+  ]}
+  notes="Use the USB method unless you have no way to format NTFS correctly."
+/>
 
 ## Important Notices
 

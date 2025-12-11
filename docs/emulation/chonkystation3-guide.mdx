@@ -2,11 +2,44 @@
 sidebar_position: 1
 title: ChonkyStation 3 UWP (Proof of Concept) Guide
 description: Complete guide for installing and running ChonkyStation 3 UWP PS3 emulator on Xbox
+tags:
+  - emulation
+  - ps3
+  - chonkystation3
+  - uwp
+  - experimental
 ---
+
+import AtAGlance from '@site/src/components/AtAGlance';
 
 # ChonkyStation 3 UWP (Proof of Concept) Guide
 
 This guide provides instructions for installing and running a Proof of Concept (POC) build of ChonkyStation 3 UWP, a PlayStation 3 emulator, on an Xbox Series S/X console in Developer Mode.  *This build is highly experimental and incomplete.  Not all games will work, and those that do may have significant issues.*
+
+<AtAGlance
+  title="ChonkyStation 3 (POC)"
+  summary="Highly experimental PS3 proof-of-concept; expect crashes and limited compatibility."
+  testedOn="03/23/2025"
+  rows={[
+    { label: 'Dev Mode', value: 'Required (Retail not supported)' },
+    { label: 'Storage', value: 'Internal LocalState only; needs space for sys files' },
+    { label: 'User folder', value: 'LocalAppData\\xbox-uwp-sdl2-starter\\LocalState\\dev_hdd0' },
+    { label: 'Difficulty', value: 'Advanced — 30+ minutes' },
+    { label: 'BIOS/keys', value: 'Uses provided sys folder files; no retail firmware flashing' },
+    { label: 'Controllers', value: 'Xbox gamepad; limited feature set' },
+  ]}
+  works={[
+    'Single .elf can be loaded from dev_hdd0\\game',
+    'Runs after copying sys folder contents to LocalState',
+    'Changing app type to Game improves stability',
+  ]}
+  issues={[
+    'Crashes common; POC only',
+    'Only one ELF at a time; no game list',
+    'Internal storage limits large assets',
+  ]}
+  notes="Use strictly for experimentation; compatibility is very low."
+/>
 
 **Ported By:** @MoonPower
 

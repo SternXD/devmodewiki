@@ -2,11 +2,43 @@
 sidebar_position: 5
 title: RetroArch Setup Guide (Mesa/Angle for Xbox)
 description: Complete guide for installing and setting up RetroArch on Xbox Developer Mode
+tags:
+  - emulation
+  - retroarch
+  - uwp
+  - xbox
 ---
+
+import AtAGlance from '@site/src/components/AtAGlance';
 
 # RetroArch Setup Guide (Mesa/Angle for Xbox)
 
 This guide provides instructions for installing and setting up RetroArch (Mesa for Xbox Series X|S, Angle for Xbox One) on consoles running in Developer Mode.
+
+<AtAGlance
+  title="RetroArch (Mesa/Angle)"
+  summary="Multi-core frontend; USB-first for BIOS, saves, and ROM paths."
+  testedOn="03/25/2025"
+  rows={[
+    { label: 'Dev Mode', value: 'Required (Retail not supported)' },
+    { label: 'Storage', value: 'USB NTFS recommended; internal LocalState/D: works for all-local setups' },
+    { label: 'User folders', value: 'Set via Settings > Directory; BIOS in LocalState\\system' },
+    { label: 'Difficulty', value: 'Intermediate — 20–30 minutes initial setup' },
+    { label: 'BIOS/keys', value: 'Per-core BIOS in system directory as needed' },
+    { label: 'Controllers', value: 'Xbox gamepad; set App type to Game for best performance' },
+  ]}
+  works={[
+    'Dev Store builds (Mesa/Angle) install via Device Portal',
+    'Core downloader after running Online Updater',
+    'USB directory mapping for ROMs/BIOS/saves',
+  ]}
+  issues={[
+    'Do not update modified ANGLE cores (Mupen64Plus-Next/ParaLLEl/Yabasanshiro)',
+    'Missing USB permissions causes path errors',
+    'Forgetting to set App type to Game hurts performance',
+  ]}
+  notes="Run Online Updater before downloading cores; leave Core directory untouched. Internal installs can live under LocalState (D: on-device) if you keep everything local."
+/>
 
 :::caution
 This guide **ONLY** covers RetroArch Mesa and RetroArch Angle. For the Citra (Nintendo 3DS) core, please refer to the separate `RetroArch Setup Guide (Citra)`.

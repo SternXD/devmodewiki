@@ -2,11 +2,44 @@
 sidebar_position: 4
 title: PPSSPP Setup Guide
 description: Complete guide for setting up PPSSPP PSP emulator on Xbox for both external USB and internal storage
+tags:
+  - emulation
+  - psp
+  - ppsspp
+  - uwp
+  - xbox
 ---
+
+import AtAGlance from '@site/src/components/AtAGlance';
 
 # PPSSPP Setup Guide
 
 This is PPSSPP Setup Guide for External and Internal PPSSPP Users.
+
+<AtAGlance
+  title="PPSSPP (PSP)"
+  summary="USB-first setup; internal storage works if needed."
+  testedOn="09/27/2024"
+  rows={[
+    { label: 'Dev Mode', value: 'Required (Retail not supported)' },
+    { label: 'Storage', value: 'USB NTFS recommended; internal LocalState works but slower' },
+    { label: 'User folder', value: 'USB:\\PSP (Create or Choose a PSP folder) or LocalAppData\\PPSSPP\\LocalState\\PSP' },
+    { label: 'Difficulty', value: 'Easy — about 10–15 minutes' },
+    { label: 'BIOS/keys', value: 'None needed; use PSP ISOs/CSOs/CHDs' },
+    { label: 'Controllers', value: 'Xbox gamepad; remap in-app' },
+  ]}
+  works={[
+    'External USB auto-pathing when permissions are correct',
+    'Custom textures and cheats via PSP folders',
+    'Games listed from E:\\PSP\\GAME when pinned',
+  ]}
+  issues={[
+    'Missing ALL APPLICATION PACKAGES permission blocks USB access',
+    'Selecting internal by mistake requires re-selecting PSP folder',
+    'Zipped games or nested folders prevent detection',
+  ]}
+  notes="Format USB NTFS and set permissions before first launch."
+/>
 
 ## PPSSPP External USB Users
 

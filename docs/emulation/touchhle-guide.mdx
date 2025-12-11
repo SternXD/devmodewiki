@@ -2,11 +2,45 @@
 sidebar_position: 6
 title: TouchHLE UWP Setup Guide
 description: Complete guide for installing and setting up TouchHLE iOS emulator on Xbox
+tags:
+  - emulation
+  - ios
+  - touchhle
+  - uwp
+  - xbox
+updated: 12/11/2025
 ---
+
+import AtAGlance from '@site/src/components/AtAGlance';
 
 # TouchHLE UWP Setup Guide
 
 This guide provides instructions for installing and setting up TouchHLE, an emulator for early iOS applications (iOS 3 and under), on an Xbox Series S/X console running in Developer Mode.
+
+<AtAGlance
+  title="TouchHLE (iOS ≤3)"
+  summary="Highly experimental iOS emulator; external USB is mandatory."
+  testedOn="08/18/2025"
+  rows={[
+    { label: 'Dev Mode', value: 'Required (Retail not supported)' },
+    { label: 'Storage', value: 'External NTFS USB required (root holds assets and app.ipa)' },
+    { label: 'User folder', value: 'USB root with touchHLE_dylibs, touchHLE_fonts, iOS folder' },
+    { label: 'Difficulty', value: 'Intermediate — about 20–30 minutes' },
+    { label: 'BIOS/keys', value: 'No BIOS; requires decrypted IPA renamed to app.ipa' },
+    { label: 'Controllers', value: 'Xbox gamepad emulates touch/tilt' },
+  ]}
+  works={[
+    'Runs app.ipa from USB root with provided dylibs/fonts',
+    'Basic touch cursor and tilt mapped to controller',
+    'Uses PC assets copied to USB for required files',
+  ]}
+  issues={[
+    'Very limited compatibility; alpha quality',
+    'Skip update prompt in-app for now',
+    'USB-only; no LocalState support',
+  ]}
+  notes="Rename your game to app.ipa and place it at USB root alongside the required folders."
+/>
 
 **Important:**
 

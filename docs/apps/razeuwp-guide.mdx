@@ -2,11 +2,44 @@
 sidebar_position: 4
 title: RazeUWP Setup Guide
 description: Complete guide for installing and setting up RazeUWP Build engine port on Xbox
+tags:
+  - apps
+  - raze
+  - build-engine
+  - uwp
+  - xbox
 ---
+
+import AtAGlance from '@site/src/components/AtAGlance';
 
 # RazeUWP Setup by MewLew
 
 This guide explains how to set up Raze, a source port for Build engine games (like Duke Nukem 3D, Blood, Shadow Warrior), on an Xbox Series S/X in Developer Mode.  It covers both external (USB drive) and internal (console storage) installation methods, including game file placement and modding.
+
+<AtAGlance
+  title="RazeUWP (Build engine)"
+  summary="Build-engine port; USB recommended for games/mods with prebuilt ini."
+  testedOn="03/09/2025"
+  rows={[
+    { label: 'Dev Mode', value: 'Required' },
+    { label: 'Storage', value: 'NTFS USB recommended; LocalState works with zip upload' },
+    { label: 'User folder', value: 'USB:\\Raze for external; LocalState for internal' },
+    { label: 'Difficulty', value: 'Intermediate — 20–30 minutes' },
+    { label: 'BIOS/keys', value: 'None; needs original game data (GRP/RFF etc.)' },
+    { label: 'Controllers', value: 'Xbox gamepad' },
+  ]}
+  works={[
+    'Premade USB folder with preconfigured raze_portable.ini',
+    'External method loads games directly from E:\\Raze subfolders',
+    'Internal method supports zipped upload and auto-unzip via portal',
+  ]}
+  issues={[
+    'Missing required game files per-folder prevents launch',
+    'Wrong NTFS permissions block USB access',
+    'Forgetting to change save_dir for internal setup causes save errors',
+  ]}
+  notes="Use the premade folder and keep game files in the expected per-title subfolders; verify NTFS permissions."
+/>
 
 ## Prerequisites
 

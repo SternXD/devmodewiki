@@ -2,11 +2,44 @@
 sidebar_position: 1
 title: BoxedWine UWP Setup Guide
 description: Complete guide for installing and using BoxedWine Windows emulator on Xbox
+tags:
+  - apps
+  - boxedwine
+  - uwp
+  - windows
+  - xbox
 ---
+
+import AtAGlance from '@site/src/components/AtAGlance';
 
 # Installing and Using BoxedWine on Xbox (Developer Mode)
 
 This guide explains how to install and run BoxedWine, a Windows application emulator, on an Xbox Series S/X console in Developer Mode.  BoxedWine allows you to run 32-bit Windows applications and games.  This guide is based on a YouTube tutorial by ReviveMe (https://www.youtube.com/@ReviveMe).
+
+<AtAGlance
+  title="BoxedWine (32-bit Windows apps)"
+  summary="Runs 32-bit Windows apps via Wine; NTFS USB strongly recommended."
+  testedOn="03/09/2025"
+  rows={[
+    { label: 'Dev Mode', value: 'Required' },
+    { label: 'Storage', value: 'NTFS USB for app zips; internal is limited' },
+    { label: 'User folder', value: 'ZIPs live on USB; app data stored internally' },
+    { label: 'Difficulty', value: 'Intermediate — 20–30 minutes' },
+    { label: 'BIOS/keys', value: 'None' },
+    { label: 'Controllers', value: 'Xbox gamepad; UI is cursor-driven' },
+  ]}
+  works={[
+    'Installs via Device Portal with dependencies',
+    'Runs zipped 32-bit apps from USB',
+    'Game type improves performance/stability',
+  ]}
+  issues={[
+    'All app files must be zipped together',
+    'Wrong NTFS permissions block USB access',
+    '64-bit apps are unsupported',
+  ]}
+  notes="Zip each 32-bit app with all needed DLLs; format USB NTFS and set permissions before install."
+/>
 
 ## Prerequisites
 

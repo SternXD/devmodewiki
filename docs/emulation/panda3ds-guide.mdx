@@ -2,11 +2,44 @@
 sidebar_position: 3
 title: Panda3DS UWP Setup Guide
 description: Complete guide for installing and setting up Panda3DS Nintendo 3DS emulator on Xbox
+tags:
+  - emulation
+  - 3ds
+  - panda3ds
+  - uwp
+  - xbox
 ---
+
+import AtAGlance from '@site/src/components/AtAGlance';
 
 # Panda3DS UWP Setup Guide
 
 This guide provides instructions for installing and setting up Panda3DS, a Nintendo 3DS emulator, on an Xbox Series S/X console running in Developer Mode.
+
+<AtAGlance
+  title="Panda3DS (3DS)"
+  summary="USB or LocalState storage; keep ROMs at the root of allowed locations."
+  testedOn="05/05/2025"
+  rows={[
+    { label: 'Dev Mode', value: 'Required (Retail not supported)' },
+    { label: 'Storage', value: 'USB NTFS recommended; LocalState works' },
+    { label: 'User folder', value: 'USB root or E:\\Panda3DS; LocalState or LocalState\\Panda3DS' },
+    { label: 'Difficulty', value: 'Easy — about 10–15 minutes' },
+    { label: 'BIOS/keys', value: 'Decrypted 3DS/CIA files required; no BIOS needed' },
+    { label: 'Controllers', value: 'Xbox gamepad' },
+  ]}
+  works={[
+    'Scans multiple allowed locations for ROMs',
+    'Dev Store build with in-app update prompt',
+    'Audio/stretch options available in settings',
+  ]}
+  issues={[
+    'Nested subfolders trigger filesystem errors',
+    'USB must be NTFS with correct permissions',
+    'Plug in USB before launch to avoid empty lists',
+  ]}
+  notes="Keep ROMs at the root of one of the allowed paths—avoid extra subfolders."
+/>
 
 **Important:**
 

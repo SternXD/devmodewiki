@@ -2,7 +2,16 @@
 sidebar_position: 7
 title: XBSX2 PS2 Emulator Setup Guide
 description: Complete guide for installing and setting up XBSX2 PS2 emulator on Xbox Series X/S
+tags:
+  - emulation
+  - ps2
+  - xbsx2
+  - pcsx2
+  - uwp
+  - xbox
 ---
+
+import AtAGlance from '@site/src/components/AtAGlance';
 
 # XBSX2 Setup Guide
 
@@ -14,6 +23,31 @@ XBSX2 is an emulator that allows you to play PlayStation 2 (PS2) games on your X
 - HD texture packs
 - 60fps patches
 - Multiplayer (local and online)
+
+<AtAGlance
+  title="XBSX2 (PS2)"
+  summary="NTFS USB recommended for games and BIOS; PS2 BIOS required."
+  testedOn="09/06/2025"
+  rows={[
+    { label: 'Dev Mode', value: 'Required (Retail not supported)' },
+    { label: 'Storage', value: 'USB NTFS recommended; internal LocalState/D: works but limited' },
+    { label: 'User folder', value: 'Store BIOS/games on USB; LocalState/D: usable if needed' },
+    { label: 'Difficulty', value: 'Intermediate — about 20–30 minutes' },
+    { label: 'BIOS/keys', value: 'PS2 BIOS required to boot games' },
+    { label: 'Controllers', value: 'Xbox gamepad; supports custom mappings' },
+  ]}
+  works={[
+    'High-res rendering, HD textures, 60fps patches on Series X/S',
+    'External USB improves load speeds',
+    'Runs best when set to Game type in Dev Home',
+  ]}
+  issues={[
+    'Xbox One hardware is underpowered for most titles',
+    'Missing BIOS prevents game boot',
+    'Incorrect NTFS permissions can block USB access',
+  ]}
+  notes="After install, change app type to Game and keep BIOS/games on NTFS USB for space and speed."
+/>
 
 ## Requirements Checklist
 

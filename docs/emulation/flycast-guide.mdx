@@ -2,9 +2,42 @@
 sidebar_position: 8
 title: Flycast Guide
 description: Complete guide for setting up and using Flycast Dreamcast/NAOMI emulator on Xbox
+tags:
+  - emulation
+  - flycast
+  - dreamcast
+  - naomi
+  - uwp
 ---
 
+import AtAGlance from '@site/src/components/AtAGlance';
+
 # Flycast Guide
+
+<AtAGlance
+  title="Flycast (Dreamcast/Naomi)"
+  summary="Dreamcast/Naomi emulator; best with NTFS USB, textures internal only."
+  testedOn="05/07/2025"
+  rows={[
+    { label: 'Dev Mode', value: 'Required (Retail not supported)' },
+    { label: 'Storage', value: 'USB NTFS recommended for ROMs/BIOS; textures must be internal' },
+    { label: 'User folder', value: 'LocalAppData\\Flycast\\LocalState (Data\\textures for packs)' },
+    { label: 'Difficulty', value: 'Intermediate — about 15–20 minutes' },
+    { label: 'BIOS/keys', value: 'dc_boot optional but recommended for compatibility' },
+    { label: 'Controllers', value: 'Xbox gamepad; set app type to Game' },
+  ]}
+  works={[
+    'Supports Dreamcast/Naomi/Atomiswave formats',
+    'USB content location selectable via Content Location',
+    'Game mode improves stability and performance',
+  ]}
+  issues={[
+    'Texture packs only load from internal Data/textures',
+    'Choosing the wrong drive path leads to empty library',
+    'Missing dc_boot reduces compatibility',
+  ]}
+  notes="After install, change app type to Game and set content path to E:/."
+/>
 
 ## Supported ROM Formats
 

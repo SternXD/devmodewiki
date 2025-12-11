@@ -361,19 +361,6 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} SternXD. Built with ❤️ using Docusaurus.`,
       },
 
-      algolia: {
-        appId: 'MO0700OKUL',
-        apiKey: '57ff699f1d819017cf3ef59e14c72b91',
-        indexName: 'devmodewiki',
-        contextualSearch: true,
-        externalUrlRegex: 'external\\.com|domain\\.com',
-        replaceSearchResultPathname: {
-          from: '/docs/',
-          to: '/',
-        },
-        searchParameters: {},
-      },
-
       announcementBar: (() => {
         const enabled = false;
         return enabled ? {
