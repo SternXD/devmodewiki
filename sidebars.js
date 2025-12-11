@@ -76,6 +76,7 @@ const sidebars = {
         'helpful-links/index',
         'helpful-links/xbox-uwp-development',
         'helpful-links/visual-studio-2022-setup',
+        'helpful-links/visual-studio-2026-setup',
         'helpful-links/worleydls-uwp-porting-notes',
       ],
     },
