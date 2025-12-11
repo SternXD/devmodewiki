@@ -374,14 +374,17 @@ const config = {
         searchParameters: {},
       },
 
-      announcementBar: {
-        id: 'announcement-bar',
-        content:
-          '⭐ New: Comprehensive guides for compiling emulators and setting up Xbox Developer Mode!',
-        backgroundColor: '#2563eb',
-        textColor: '#ffffff',
-        isCloseable: true,
-      },
+      announcementBar: (() => {
+        const enabled = false;
+        return enabled ? {
+          id: 'announcement-bar',
+          content:
+            '⭐ New: Comprehensive guides for compiling emulators and setting up Xbox Developer Mode!',
+          backgroundColor: '#2563eb',
+          textColor: '#ffffff',
+          isCloseable: true,
+        } : undefined;
+      })(),
 
       colorMode: {
         defaultMode: 'dark',
