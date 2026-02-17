@@ -90,3 +90,55 @@
   background: var(--ifm-color-secondary-darkest);
   border: 1px solid var(--ifm-color-secondary-darker);
 }
+
+.markdown img {
+  cursor: zoom-in;
+  transition: transform 0.2s ease;
+  border-radius: 8px;
+}
+
+.markdown img:hover {
+  opacity: 0.9;
+}
+
+.theme-code-block {
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] .theme-code-block {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.docusaurus-mermaid-container {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.markdown table {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.theme-admonition {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin: 1.5rem 0;
+}
+
+.markdown a:not(.button):not(.anchor) {
+  transition: color 0.2s ease;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.markdown a:not(.button):not(.anchor):hover {
+  text-decoration-thickness: 2px;
+}
+

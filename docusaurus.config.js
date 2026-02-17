@@ -8,7 +8,6 @@
 // See: https://docusaurus.io/docs/api/docusaurus-config
 
 import {themes as prismThemes} from 'prism-react-renderer';
-import { lazy } from 'react';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -29,10 +28,13 @@ const config = {
 
   onBrokenLinks: 'throw',
   markdown: {
+    mermaid: true,
     hooks: {
       onBrokenMarkdownLinks: 'warn',
     },
   },
+
+  themes: ['@docusaurus/theme-mermaid'],
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -42,29 +44,64 @@ const config = {
     locales: ['en'],
   },
 
-  customFields: {
-    metadata: {
-      description: 'Comprehensive Xbox Developer Mode setup guides, emulation tutorials, and homebrew development resources. Learn to compile emulators and set up Xbox for development.',
-      keywords: 'Xbox, Developer Mode, emulation, homebrew, XBSX2, Dolphin, PPSSPP, RetroArch, compilation, setup guide',
-      author: 'SternXD',
-      robots: 'index, follow',
-      viewport: 'width=device-width, initial-scale=1.0',
-      og: {
-        type: 'website',
-        url: 'https://wiki.sternserv.xyz/',
-        title: 'Dev Mode Wiki - Xbox Developer Mode & Emulation Guides',
-        description: 'Complete Xbox Developer Mode setup guides, emulation tutorials, and homebrew development resources.',
-        image: 'https://wiki.sternserv.xyz/img/logo.png',
-      },
-      twitter: {
-        card: 'summary_large_image',
-        url: 'https://wiki.sternserv.xyz/',
-        title: 'Dev Mode Wiki - Xbox Developer Mode & Emulation Guides',
-        description: 'Complete Xbox Developer Mode setup guides, emulation tutorials, and homebrew development resources.',
-        image: 'https://wiki.sternserv.xyz/img/logo.png',
-      },
+  headTags: [
+    {
+      tagName: 'meta',
+      attributes: { name: 'description', content: 'Comprehensive Xbox Developer Mode setup guides, emulation tutorials, and homebrew development resources. Learn to compile emulators and set up Xbox for development.' }
     },
-  },
+    {
+      tagName: 'meta',
+      attributes: { name: 'keywords', content: 'Xbox, Developer Mode, emulation, homebrew, XBSX2, Dolphin, PPSSPP, RetroArch, compilation, setup guide' }
+    },
+    {
+      tagName: 'meta',
+      attributes: { name: 'author', content: 'SternXD' }
+    },
+    {
+      tagName: 'meta',
+      attributes: { name: 'robots', content: 'index, follow' }
+    },
+    {
+      tagName: 'meta',
+      attributes: { property: 'og:type', content: 'website' }
+    },
+    {
+      tagName: 'meta',
+      attributes: { property: 'og:url', content: 'https://wiki.sternserv.xyz/' }
+    },
+    {
+      tagName: 'meta',
+      attributes: { property: 'og:title', content: 'Dev Mode Wiki - Xbox Developer Mode & Emulation Guides' }
+    },
+    {
+      tagName: 'meta',
+      attributes: { property: 'og:description', content: 'Complete Xbox Developer Mode setup guides, emulation tutorials, and homebrew development resources.' }
+    },
+    {
+      tagName: 'meta',
+      attributes: { property: 'og:image', content: 'https://wiki.sternserv.xyz/img/logo.png' }
+    },
+    {
+      tagName: 'meta',
+      attributes: { name: 'twitter:card', content: 'summary_large_image' }
+    },
+    {
+      tagName: 'meta',
+      attributes: { name: 'twitter:url', content: 'https://wiki.sternserv.xyz/' }
+    },
+    {
+      tagName: 'meta',
+      attributes: { name: 'twitter:title', content: 'Dev Mode Wiki - Xbox Developer Mode & Emulation Guides' }
+    },
+    {
+      tagName: 'meta',
+      attributes: { name: 'twitter:description', content: 'Complete Xbox Developer Mode setup guides, emulation tutorials, and homebrew development resources.' }
+    },
+    {
+      tagName: 'meta',
+      attributes: { name: 'twitter:image', content: 'https://wiki.sternserv.xyz/img/logo.png' }
+    },
+  ],
 
   presets: [
     [
@@ -101,106 +138,55 @@ const config = {
   ],
 
   plugins: [
-    function metadataPlugin(context, options) {
-      return {
-        name: 'metadata-plugin',
-        injectHtmlTags() {
-          const { customFields } = context.siteConfig;
-          const metadata = customFields?.metadata;
-
-          if (!metadata) return {};
-
-          const headTags = [];
-
-          // Basic metadata
-          if (metadata.description) {
-            headTags.push({
-              tagName: 'meta',
-              attributes: { name: 'description', content: metadata.description }
-            });
-          }
-          if (metadata.keywords) {
-            headTags.push({
-              tagName: 'meta',
-              attributes: { name: 'keywords', content: metadata.keywords }
-            });
-          }
-          if (metadata.author) {
-            headTags.push({
-              tagName: 'meta',
-              attributes: { name: 'author', content: metadata.author }
-            });
-          }
-          if (metadata.robots) {
-            headTags.push({
-              tagName: 'meta',
-              attributes: { name: 'robots', content: metadata.robots }
-            });
-          }
-          if (metadata.viewport) {
-            headTags.push({
-              tagName: 'meta',
-              attributes: { name: 'viewport', content: metadata.viewport }
-            });
-          }
-
-          if (metadata.og) {
-            const og = metadata.og;
-            if (og.type) headTags.push({ tagName: 'meta', attributes: { property: 'og:type', content: og.type } });
-            if (og.url) headTags.push({ tagName: 'meta', attributes: { property: 'og:url', content: og.url } });
-            if (og.title) headTags.push({ tagName: 'meta', attributes: { property: 'og:title', content: og.title } });
-            if (og.description) headTags.push({ tagName: 'meta', attributes: { property: 'og:description', content: og.description } });
-            if (og.image) headTags.push({ tagName: 'meta', attributes: { property: 'og:image', content: og.image } });
-          }
-
-          if (metadata.twitter) {
-            const twitter = metadata.twitter;
-            if (twitter.card) headTags.push({ tagName: 'meta', attributes: { name: 'twitter:card', content: twitter.card } });
-            if (twitter.url) headTags.push({ tagName: 'meta', attributes: { name: 'twitter:url', content: twitter.url } });
-            if (twitter.title) headTags.push({ tagName: 'meta', attributes: { name: 'twitter:title', content: twitter.title } });
-            if (twitter.description) headTags.push({ tagName: 'meta', attributes: { name: 'twitter:description', content: twitter.description } });
-            if (twitter.image) headTags.push({ tagName: 'meta', attributes: { name: 'twitter:image', content: twitter.image } });
-          }
-
-          // Add gtag fix script
-          headTags.push({
-            tagName: 'script',
-            innerHTML: `
-              // Fix for gtag loading issue
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              window.gtag = gtag;
-
-              // Load Google Analytics script
-              (function() {
-                var script = document.createElement('script');
-                script.async = true;
-                script.src = 'https://www.googletagmanager.com/gtag/js?id=G-BZYS4Z3DR5';
-                document.head.appendChild(script);
-
-                gtag('js', new Date());
-                gtag('config', 'G-BZYS4Z3DR5', { anonymize_ip: true });
-              })();
-            `,
-          });
-
-          return { headTags };
-        },
-      };
-    },
     [
-      'docusaurus-lunr-search',
+      '@docusaurus/plugin-ideal-image',
       {
-        languages: ['en'],
-        maxHits: 15,
-        indexBatchSize: 100,
-        excludeRoutes: [
-          'docs/tags/**',
-          '404.html'
-        ],
-        indexBaseUrl: true,
-      }
+        quality: 85,
+        max: 2000,
+        min: 500,
+        steps: 4,
+        disableInDev: false,
+      },
     ],
+    [
+      '@docusaurus/plugin-pwa',
+      {
+        debug: false,
+        offlineModeActivationStrategies: [
+          'appInstalled',
+          'standalone',
+          'queryString',
+        ],
+        pwaHead: [
+          {
+            tagName: 'link',
+            rel: 'icon',
+            href: '/img/logo.png',
+          },
+          {
+            tagName: 'link',
+            rel: 'manifest',
+            href: '/manifest.json',
+          },
+          {
+            tagName: 'meta',
+            name: 'theme-color',
+            content: '#2563eb',
+          },
+          {
+            tagName: 'meta',
+            name: 'apple-mobile-web-app-capable',
+            content: 'yes',
+          },
+          {
+            tagName: 'meta',
+            name: 'apple-mobile-web-app-status-bar-style',
+            content: '#2563eb',
+          },
+        ],
+      },
+    ],
+    'docusaurus-plugin-image-zoom',
   ],
 
   themeConfig:
@@ -382,7 +368,22 @@ const config = {
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
-        additionalLanguages: ['powershell', 'bash', 'json', 'diff', 'ini', 'log'],
+        additionalLanguages: ['powershell', 'bash', 'json', 'diff', 'ini', 'log', 'csharp', 'cpp'],
+      },
+
+      zoom: {
+        selector: '.markdown :not(em) > img',
+        background: {
+          light: 'rgb(255, 255, 255)',
+          dark: 'rgb(50, 50, 50)'
+        },
+        config: {
+          margin: 24,
+        }
+      },
+
+      mermaid: {
+        theme: {light: 'neutral', dark: 'dark'},
       },
 
       tableOfContents: {
