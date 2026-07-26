@@ -1,0 +1,68 @@
+---
+title: "Sega Rally Championship Guide"
+sidebar_position: 35
+description: "A guide for setting up Sega Rally Championship on dev mode."
+tags:
+  - guides
+  - ports
+  - xbox
+slug: sega-rally-championship-guide
+---
+
+
+### Requirements
+- You will require the **Sega Rally Championship - Twin/DX (Revision C)** game files in the format `srallyc.zip`.
+- This must be the standalone set.
+- Do not extract `srallyc.zip`.
+
+### Install the Sega Rally Championship App
+- Install the Sega Rally Championship `.appx` file via the dev portal.
+
+### External Storage Setup
+- Add `srallyc.zip` to the root of your **E:** drive.
+- On initial launch, the app will automatically copy `srallyc.zip` to LocalState.
+
+### Internal Storage Setup
+- Launch the game once.
+- Close the app once it black screens.
+- Open the Dev Portal file explorer.
+- Go to:
+
+```text
+Sega Rally Championship/LocalState/roms
+```
+- Upload `srallyc.zip` to this folder.
+- Do not extract `srallyc.zip`.
+
+If using a custom soundtrack, go to:
+
+```text
+Sega Rally Championship/LocalState/soundtrack
+```
+- Upload your renamed soundtrack files to this folder.
+
+The soundtrack folder should look like this:
+
+```text
+soundtrack/attract.mp3
+soundtrack/select.mp3
+soundtrack/desert.mp3
+soundtrack/forest.mp3
+soundtrack/mountain.mp3
+soundtrack/lakeside.mp3
+soundtrack/goal.mp3
+soundtrack/timeup.mp3
+soundtrack/nameentry.mp3
+soundtrack/gameover.mp3
+soundtrack/credits.mp3
+soundtrack/ending.mp3
+soundtrack/results.mp3
+```
+
+### Custom Soundtrack
+- Custom soundtracks can be enabled in **Sound Options**.
+- Music cues are triggered directly by the game, so each file must match the expected event or stage name.
+
+---
+
+*Contributor: MewLew*
