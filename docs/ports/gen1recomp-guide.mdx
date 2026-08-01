@@ -1,0 +1,89 @@
+---
+title: "Gen1Recomp Guide"
+sidebar_position: 14
+description: "A guide for setting up Gen1Recomp on Xbox dev mode."
+tags:
+  - guides
+  - ports
+  - xbox
+slug: gen1recomp-guide
+---
+
+
+### Requirements
+- You will need legally owned **Pokémon Red**, **Pokémon Blue**, or **Pokémon Yellow** ROMs.
+- Gen1Recomp supports Red, Blue, Yellow, Xbox controllers, mods, and the Xbox file picker for external storage.
+
+### Install Gen1Recomp
+- Install the Gen1Recomp Xbox UWP package via the dev portal.
+- Install the dependency file
+
+### Internal Storage Setup
+- Install Gen1Recomp on a Windows PC first.
+- Import your Red, Blue, and Yellow ROMs.
+- Install any mods you want to use.
+- Close the game once the imports have finished.
+
+On Windows, open:
+
+```text
+C:\Users\<Username>\AppData\Roaming\pokemon-love2d
+```
+
+Create a ZIP containing these folders and file:
+
+```text
+data/
+blue/
+assets/
+yellow/
+mods/
+rom-cache.complete
+```
+
+Keep these items at the top level of the ZIP.
+
+Do not place them inside another `pokemon-love2d` folder in the archive.
+
+### Upload to Xbox LocalState
+- Launch the Xbox app once.
+- Close the app.
+- Open the Xbox Device Portal file browser.
+- Upload the ZIP to:
+
+```text
+Gen1Recomp/LocalState/pokemon-love2d/
+```
+
+- Choose **Yes** when prompted to extract it.
+
+On next launch, Gen1Recomp should find the imported games and mods without asking for the ROMs again.
+
+### External Storage Setup
+- Put your legally owned Red, Blue, or Yellow ROMs on an external drive connected to the Xbox.
+- Add any mod ZIPs you want to use.
+- Open Gen1Recomp.
+- Select **Import ROM** or **Import Mod**.
+- Use the Xbox file picker to select the relevant file.
+- Repeat the ROM import for each version you want to use.
+
+### Default Xbox Controls
+
+| Xbox Control | Default Action |
+| --- | --- |
+| D-pad / Left Stick | Move |
+| A | A / confirm |
+| B | B / cancel |
+| Menu | Start |
+| View | Select |
+
+### Controls, Saves, and Settings
+Controls can be changed in:
+
+```text
+Options > Controls
+```
+
+Saves, settings, generated ROM data, and internally installed mods remain in the app's LocalState folder.
+
+---
