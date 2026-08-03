@@ -1,0 +1,81 @@
+---
+title: "Syphon Filter Guide"
+sidebar_position: 60
+description: "A guide for setting up Syphon Filter UWP on Xbox dev mode."
+tags:
+  - guides
+  - ports
+  - xbox
+slug: syphon-filter-uwp-guide
+---
+
+
+### Requirements
+- **Syphon Filter USA v1.1** game `.cue` and `.bin` dump.
+- The required game ID is `SCUS-94240`.
+
+### Install the Syphon Filter UWP App
+- Install the Syphon Filter `.appx` package via the dev portal.
+- Install the included dependency file.
+- Launch **Syphon Filter UWP** from Dev Mode.
+
+### External Storage Setup
+- Place your matching `.cue` and `.bin` files together in one folder on your external drive.
+- Launch the app.
+- When the folder picker opens, select the folder containing the game files.
+- The game will import the files into LocalState and start.
+
+The imported files are stored here:
+
+```text
+LocalState/GAME
+```
+
+### Internal Storage Setup
+- Launch the app once.
+- Close the app after the LocalState folders are created.
+- Open the Dev Portal file explorer.
+- Go to **LocalAppData**.
+- Select the `SyphonFilterUWP` package.
+- Open:
+
+```text
+LocalState/GAME
+```
+
+- Upload your matching `.bin` and `.cue` game files.
+- Launch the app again.
+- The game will automatically prepare the files for use.
+
+### Default Xbox Controls
+
+| Xbox Control | Default Action |
+| --- | --- |
+| Left Stick / D-pad | Move, turn, and navigate menus |
+| Right Stick | Look while aiming |
+| A | Kneel / confirm |
+| B | Roll, zoom out, or cancel |
+| X | Fire |
+| Y | Interact or zoom in |
+| LB | Aim |
+| RB | Target lock |
+| LT / RT | Step left / right |
+| View | Change weapon |
+| View + LT / RT | Cycle weapons |
+| Menu | Pause |
+| L3 + R3 | Open Display & Performance |
+
+### Controls and Display Settings
+Controller presets and custom bindings are available from:
+
+```text
+Pause > Options > Controller
+```
+
+Display settings are available from:
+
+```text
+Pause > Options > Display & Performance
+```
+
+---
