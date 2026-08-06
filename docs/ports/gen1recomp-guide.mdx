@@ -1,7 +1,7 @@
 ---
 title: "Gen1Recomp Guide"
 sidebar_position: 14
-description: "A guide for setting up Gen1Recomp on Xbox dev mode."
+description: "A guide for setting up Gen1Recomp on Xbox Dev Mode."
 tags:
   - guides
   - ports
@@ -9,63 +9,79 @@ tags:
 slug: gen1recomp-guide
 ---
 
-
 ### Requirements
-- You will need legally owned **Pokémon Red**, **Pokémon Blue**, or **Pokémon Yellow** ROMs.
-- Gen1Recomp supports Red, Blue, Yellow, Xbox controllers, mods, and the Xbox file picker for external storage.
+
+- Legally obtained **Pokémon Red**, **Pokémon Blue**, or **Pokémon Yellow** ROMs.
+- An Xbox One or Xbox Series console configured for Developer Mode.
+- Gen1Recomp supports Red, Blue, Yellow, Xbox controllers, mods, remote mod indexes, mod updates, and the Xbox file picker.
 
 ### Install Gen1Recomp
-- Install the Gen1Recomp Xbox UWP package via the dev portal.
-- Install the dependency file
 
-### Internal Storage Setup
-- Install Gen1Recomp on a Windows PC first.
-- Import your Red, Blue, and Yellow ROMs.
-- Install any mods you want to use.
-- Close the game once the imports have finished.
+- Extract the Xbox UWP release archive.
+- Open Xbox Device Portal.
+- Install the Gen1Recomp `.msix`.
+- Add and install the x64 package found under `Dependencies`.
 
-On Windows, open:
+## Internal Storage Setup
 
-```text
-C:\Users\<Username>\AppData\Roaming\pokemon-love2d
-```
-
-Create a ZIP containing these folders and file:
-
-```text
-data/
-blue/
-assets/
-yellow/
-mods/
-rom-cache.complete
-```
-
-Keep these items at the top level of the ZIP.
-
-Do not place them inside another `pokemon-love2d` folder in the archive.
+This method imports ROMs stored inside the app's LocalState folder and does not require an external drive.
 
 ### Upload to Xbox LocalState
-- Launch the Xbox app once.
-- Close the app.
-- Open the Xbox Device Portal file browser.
-- Upload the ZIP to:
+
+1. Launch Gen1Recomp, then close it when you reach the launcher.
+2. Open the Xbox Device Portal file browser.
+3. Navigate to:
 
 ```text
-Gen1Recomp/LocalState/pokemon-love2d/
+Gen1Recomp/LocalState/pokemon-love2d/baseroms/
 ```
 
-- Choose **Yes** when prompted to extract it.
+4. Upload your legally obtained Red, Blue, or Yellow ROM files directly into the `baseroms` folder.
+5. Open Gen1Recomp.
 
-On next launch, Gen1Recomp should find the imported games and mods without asking for the ROMs again.
+For convenience, you can place all three ROM files in a single ZIP, upload the ZIP into `baseroms`, and choose **Yes** when Device Portal asks whether to extract it. Make sure the extracted ROM files are directly inside `baseroms` rather than inside another nested folder.
 
-### External Storage Setup
-- Put your legally owned Red, Blue, or Yellow ROMs on an external drive connected to the Xbox.
-- Add any mod ZIPs you want to use.
-- Open Gen1Recomp.
-- Select **Import ROM** or **Import Mod**.
-- Use the Xbox file picker to select the relevant file.
-- Repeat the ROM import for each version you want to use.
+Filenames do not matter. Gen1Recomp identifies compatible ROMs by SHA-1.
+
+On Xbox UWP, the launcher checks `baseroms` once at startup. When it finds a compatible ROM, that game's tab shows **ROM FOUND** and an **Import detected ROM** button.
+
+Select **Import detected ROM** to generate the required game data. Repeat this for each detected version you want to use.
+
+## External Storage Setup
+
+1. Put your legally obtained Red, Blue, or Yellow ROMs on an external drive connected to the Xbox.
+2. Add any mod ZIPs you want to import manually.
+3. Open Gen1Recomp.
+4. Select **Import ROM** or **Import Mod**.
+5. Use the Xbox file picker to select the relevant file.
+6. Repeat the ROM import for each version you want to use.
+
+## Remote Mod Indexes
+
+Gen1Recomp can browse and install mods from compatible remote JSON indexes.
+
+1. Open the **FIND MODS** tab.
+2. Select **Indexes**.
+3. Select **Add index**.
+4. Enter the compatible `index.json` URL.
+5. Select **Add**.
+
+The index will load into the **FIND MODS** page. Select a listed mod to view its details and install it directly.
+
+Use **Indexes → Refresh all** to refresh every configured index.
+
+An internet connection is required for remote indexes and downloads. Mod ZIPs can still be imported manually from external storage.
+
+## Updating Mods
+
+Mods that publish compatible GitHub release information can be updated directly from the launcher.
+
+1. Open the **MODS** tab.
+2. Select the installed mod.
+3. Select **Check for updates**.
+4. If a newer version is available, select **Update** and confirm the installation.
+
+The launcher downloads and installs the new mod version automatically. Mods without update information can still be replaced by importing a newer ZIP manually.
 
 ### Default Xbox Controls
 
@@ -78,12 +94,15 @@ On next launch, Gen1Recomp should find the imported games and mods without askin
 | View | Select |
 
 ### Controls, Saves, and Settings
-Controls can be changed in:
+
+Controls can be changed under:
 
 ```text
 Options > Controls
 ```
 
-Saves, settings, generated ROM data, and internally installed mods remain in the app's LocalState folder.
+Saves, settings, generated ROM data, downloaded mods, and internally installed mods remain in the app's LocalState folder.
 
 ---
+
+*Contributor: MewLew*
