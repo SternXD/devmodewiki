@@ -209,11 +209,20 @@ The shipped magnitude is:
 0.007
 ```
 
-Keep `j_yaw` negative for normal horizontal aiming.
+### Invert vertical aiming
+To invert the right stick:
 
-Keep `j_pitch` positive for normal vertical aiming.
+```cfg
+bind PAD0_RIGHTSTICK_UP "+lookdown"
+bind PAD0_RIGHTSTICK_DOWN "+lookup"
+```
 
-Make `j_pitch` negative to invert vertical aiming.
+To restore normal vertical aiming:
+
+```cfg
+bind PAD0_RIGHTSTICK_UP "+lookup"
+bind PAD0_RIGHTSTICK_DOWN "+lookdown"
+```
 
 ### Mods
 Some desktop mod PK3 files have been tested and work on Xbox.
