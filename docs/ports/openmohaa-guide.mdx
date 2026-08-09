@@ -1,0 +1,288 @@
+---
+title: "OpenMoHAA Guide"
+sidebar_position: 27
+description: "A guide for setting up OpenMoHAA on Xbox Dev Mode."
+tags:
+  - guides
+  - ports
+  - xbox
+slug: openmohaa-guide
+---
+
+
+### Requirements
+- You will need an Xbox Series console configured for Developer Mode.
+- You will need the OpenMoHAA x64 `.msix`.
+- You will need the `Microsoft.VCLibs.x64.14.00.appx` dependency.
+- You will need a complete legally owned **Medal of Honor: Allied Assault War Chest** installation.
+
+OpenMoHAA supports:
+
+- **Medal of Honor: Allied Assault**
+- **Spearhead**
+- **Breakthrough**
+
+This port does not include the original game data.
+
+### Install OpenMoHAA
+- Install the `Microsoft.VCLibs.x64.14.00.appx` dependency via the dev portal.
+- Install the OpenMoHAA x64 `.msix` via the dev portal.
+
+### Game Data Folders
+The game data uses these folders:
+
+```text
+main     Allied Assault
+mainta   Spearhead
+maintt   Breakthrough
+```
+
+Always copy the complete `main` folder.
+
+Copy `mainta` and `maintt` if you own and want to play the expansions.
+
+### Internal Storage Setup
+- Launch OpenMoHAA once before copying the game data.
+- Close the app.
+- This creates the app's LocalState folder.
+- Open the Dev Portal file explorer.
+- Upload the game folders directly into:
+
+```text
+LocalState/
+```
+
+The folder should look like this:
+
+```text
+LocalState/
+├── main/
+├── mainta/
+└── maintt/
+```
+
+The game folders contain hundreds of files, so uploading each folder individually can take a long time in Device Portal.
+
+For easier setup, ZIP the `main`, `mainta`, and `maintt` folders together, upload the ZIP to `LocalState`, and choose **Yes** when Device Portal asks whether to extract the archive.
+
+The ZIP should keep the game folders at the top level:
+
+```text
+main/
+mainta/
+maintt/
+```
+
+Internal saves and settings may be removed when the app is uninstalled.
+
+Back up LocalState first if you want to keep them.
+
+### External Storage Setup
+Use this exact folder on the external drive:
+
+```text
+E:/OpenMoHAA
+```
+
+The layout should be:
+
+```text
+E:/OpenMoHAA/
+├── main/
+├── mainta/
+└── maintt/
+```
+
+External storage is used when this file exists and the folder is writable:
+
+```text
+E:/OpenMoHAA/main/Pak0.pk3
+```
+
+If this file is not found, OpenMoHAA uses internal LocalState.
+
+### Launch OpenMoHAA
+Once the game data is in place, launch OpenMoHAA from Dev Mode.
+
+When OpenMoHAA starts, choose a game with the **D-pad** or **Left Stick**.
+
+Press **A** or **Menu** to start it.
+
+### Console
+Open:
+
+```text
+Options > Advanced
+```
+
+Enable:
+
+```text
+Console
+```
+
+A red **X** means it is enabled.
+
+Press **View** and **Menu** together to open or close the console.
+
+The Xbox keyboard opens with it.
+
+### Configuration Files
+Each game has its own settings file:
+
+```text
+<storage root>/main/configs/omconfig.cfg
+<storage root>/mainta/configs/omconfig.cfg
+<storage root>/maintt/configs/omconfig.cfg
+```
+
+Close OpenMoHAA before editing a config file.
+
+Settings can also be entered in the console without quotes.
+
+### Resolution
+Native Xbox resolution is the default.
+
+For a custom resolution, open the required `omconfig.cfg` and set `r_mode` to `-1`.
+
+Example:
+
+```cfg
+seta r_customwidth "2560"
+seta r_customheight "1440"
+seta r_customaspect "1.7777778"
+seta r_mode "-1"
+```
+
+The same change can be made in the console:
+
+```text
+seta r_customwidth 2560
+seta r_customheight 1440
+seta r_customaspect 1.7777778
+seta r_mode -1
+vid_restart
+```
+
+Use this value for 16:9 resolutions, including 720p, 1080p, 1440p, and 2160p:
+
+```text
+seta r_customaspect 1.7777778
+```
+
+Do not force:
+
+```text
+r_fullscreen 1
+```
+
+### Right Stick Look Sensitivity
+These are example values.
+
+Change `0.005` to suit your preference:
+
+```cfg
+seta j_yaw "-0.005"
+seta j_pitch "0.005"
+```
+
+Or use the console:
+
+```text
+seta j_yaw -0.005
+seta j_pitch 0.005
+```
+
+A smaller magnitude is slower.
+
+A larger magnitude is faster.
+
+For example:
+
+```text
+0.003 is slower than 0.010
+```
+
+The shipped magnitude is:
+
+```text
+0.007
+```
+
+Keep `j_yaw` negative for normal horizontal aiming.
+
+Keep `j_pitch` positive for normal vertical aiming.
+
+Make `j_pitch` negative to invert vertical aiming.
+
+### Mods
+Some desktop mod PK3 files have been tested and work on Xbox.
+
+Put each PK3 in the folder for its game:
+
+```text
+main     Allied Assault mods
+mainta   Spearhead mods
+maintt   Breakthrough mods
+```
+
+Not every mod has been tested.
+
+Mods that need a Windows EXE or DLL will not work.
+
+Back up the folder before adding or removing mods.
+
+Servers using custom maps may require matching PK3 files to be installed manually.
+
+### Default Menu Controls
+
+| Xbox Control | Action |
+| --- | --- |
+| Left Stick | Move cursor |
+| Right Stick Up / Down | Scroll |
+| A | Select or click |
+| B | Back |
+| D-pad | Move through menu items |
+| Menu | Back |
+
+Selecting a text field opens the Xbox keyboard.
+
+### Default In-Game Controls
+
+| Xbox Control | Action |
+| --- | --- |
+| Left Stick | Move |
+| Right Stick | Look |
+| Right Trigger | Primary attack |
+| Left Trigger | Secondary attack |
+| A | Jump |
+| B | Crouch |
+| X | Use |
+| Y | Reload |
+| Left Bumper | Lean left |
+| Right Bumper | Lean right |
+| D-pad Up | Next weapon |
+| D-pad Down | Previous weapon |
+| Left Stick Click | Run |
+| Right Stick Click | Holster weapon |
+| View | Scores / Objectives |
+| Menu | Pause |
+
+The Xbox mappings are added when a game creates a clean config.
+
+Later changes are kept.
+
+The **Default** button in:
+
+```text
+Options > Controls
+```
+
+restores the Xbox mappings.
+
+### Multiplayer
+Joining public servers and connecting directly to an IP address work.
+
+An Xbox hosted game can also be joined by direct IP.
+
+---
