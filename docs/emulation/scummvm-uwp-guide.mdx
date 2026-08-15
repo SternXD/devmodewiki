@@ -1,0 +1,73 @@
+---
+title: "ScummVM UWP Guide"
+sidebar_position: 8
+description: "A guide for setting up ScummVM UWP on Xbox Dev Mode."
+tags:
+  - guides
+  - emulators
+  - xbox
+slug: scummvm-uwp-guide
+---
+
+Getting ScummVM UWP running on your Xbox console in Developer Mode is one of the easiest ways to enjoy classic point-and-click adventure games on modern hardware. Because it features ScummVM's native launcher GUI, you get the authentic interface and direct access to game settings without needing to navigate through RetroArch.
+
+This guide walks you through requirements, installation steps, game management, and default controller mappings.
+
+### Requirements
+- An Xbox Series or Xbox One console configured for Developer Mode.
+- The latest `ScummVM UWP x64` release package.
+- Legally owned files for your ScummVM supported games.
+
+ScummVM UWP brings full support for iconic point-and-click series, including:
+- **Monkey Island**
+- **Broken Sword**
+- **Discworld**
+- **Legend of Kyrandia**
+- **Simon the Sorcerer**
+
+*Note: This port is purely the core wrapper and does not include any game files.*
+
+### Installation Steps
+1. Download and extract the latest `scummvm-uwp` x64 archive.
+2. Open the **Xbox Device Portal** in your web browser.
+3. Install the extracted `.appx` package and all dependency files in x64.
+4. Launch ScummVM.
+
+On its initial run, ScummVM automatically unpacks its essential engine data and system files directly into:
+
+```text
+LocalState/system
+```
+
+### Adding Games
+Games are managed directly through ScummVM's built-in GUI:
+
+1. Launch ScummVM UWP.
+2. Select **Add Game...** from the launcher menu.
+3. Navigate to and select the directory containing your game's data files (or select a `.scummvm` shortcut file).
+4. For multi-disc or CD-ROM games, select the folder containing your ripped disc contents.
+
+### Controller Layout
+
+| Xbox Control | ScummVM Action |
+| --- | --- |
+| **Left Stick / D-pad** | Move mouse cursor |
+| **A** | Spacebar |
+| **B** | Enter |
+| **X** | F5 / Main Game Menu |
+| **Y** | Escape |
+| **LB** | Left Mouse Click |
+| **RB** | Right Mouse Click |
+| **RT** | Fine Cursor Control (Slower speed) |
+| **View** | Toggle Virtual Keyboard |
+| **Menu** | Open ScummVM GUI / Options |
+| **Right Stick** | Arrow Keys |
+| **LT / L3 / R3** | Unassigned by default |
+
+You can rebind these controls at any time by going to **Options > Keymaps** within the ScummVM menu.
+
+### RetroArch Integration
+ScummVM UWP uses the official ScummVM libretro core under the hood, but presents ScummVM's native launcher GUI instead of RetroArch's menu or OSD. It operates completely independently and can safely run alongside an existing RetroArch installation.
+If RetroArch is already installed on the console, ScummVM UWP can hand off to it. In that case, install the ScummVM core inside RetroArch first.
+
+---
