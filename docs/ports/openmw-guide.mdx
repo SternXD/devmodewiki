@@ -9,40 +9,53 @@ tags:
 slug: openmw-guide
 ---
 
-Getting OpenMW running on an Xbox Series S or Series X in Developer Mode is a fantastic way to experience *The Elder Scrolls III: Morrowind* on modern console hardware. Because this is an unofficial community port running through a custom translation layer, setting everything up properly takes a bit of care.
+OpenMW lets you play *The Elder Scrolls III: Morrowind* on an Xbox Series S or Series X in Developer Mode.
 
-This guide walks you through installation, storage configuration, performance tuning, and migrating desktop mod lists.
+This guide covers installation, storage, the setup wizard, useful settings and mods.
 
-*This is an unofficial port. Xbox specific issues should be discussed in dev mode community discords and not reported to the upstream OpenMW development team.*
+*Please do not report Xbox specific problems to the upstream OpenMW team. Use the Xbox Dev Mode community instead.*
 
 ### Requirements
-- You will need an Xbox Series S or Xbox Series X configured for Developer Mode (Xbox One is not supported).
-- You will need the OpenMW `.msix` package.
-- You will need the dependency file supplied with the release.
-- You will need your own legally owned copy of **The Elder Scrolls III: Morrowind**. The **Game of the Year (GOTY)** edition is strongly recommended, as it includes the **Tribunal** and **Bloodmoon** expansions.
 
-This port is strictly an engine package and does not include original game files, textures, or mods.
+- An Xbox Series S or Series X configured for Developer Mode. Xbox One is not supported.
+- The OpenMW `.msix` package.
+- The dependency file supplied with the release.
+- Your own legally owned copy of **The Elder Scrolls III: Morrowind**.
+
+The **Game of the Year** edition is recommended because it includes the **Tribunal** and **Bloodmoon** expansions.
+
+This port contains the OpenMW engine only. It does not include Morrowind game files, textures or mods.
 
 ### Install OpenMW
-1. Open the **Xbox Device Portal** on your browser while your console is in Developer Mode.
-2. Install the OpenMW `.msix` bundle via the App Manager.
-3. Install the required dependency file supplied with the release.
 
-### External Storage Setup
-Copy the complete **contents** of Morrowind's original `Data Files` folder to your USB drive:
+1. Start the Xbox in Developer Mode.
+2. Open the **Xbox Device Portal** in a browser.
+3. Install the OpenMW `.msix` through the App Manager.
+4. Install the dependency file supplied with the release.
 
-```text
-E:/OpenMW/data
-```
+### External storage setup
 
-The folder should contain essential files such as:
+Copy the complete **contents** of Morrowind's original `Data Files` folder to:
 
 ```text
-Morrowind.esm
-Morrowind.bsa
+E:\OpenMW\data
 ```
 
-It should also contain subdirectories including:
+Copy `Morrowind.ini` from the original Morrowind installation folder to:
+
+```text
+E:\OpenMW\Morrowind.ini
+```
+
+Your files should include:
+
+```text
+E:\OpenMW\Morrowind.ini
+E:\OpenMW\data\Morrowind.esm
+E:\OpenMW\data\Morrowind.bsa
+```
+
+The `data` folder should also contain folders such as:
 
 ```text
 Meshes
@@ -51,156 +64,198 @@ Sound
 Textures
 ```
 
-Add the **Tribunal** and **Bloodmoon** files as well if your edition includes them.
+Copy the Tribunal and Bloodmoon files into the same `data` folder if your edition includes them.
 
-OpenMW automatically uses external storage when it finds:
-
-```text
-E:/OpenMW/data/Morrowind.esm
-```
-
-If this file is not found, OpenMW will fall back to internal `LocalState` storage instead.
-
-### Internal Storage Setup
-1. Access the app's `LocalState` folder in the Xbox Device Portal.
-2. Create this folder:
+OpenMW uses external storage when it finds:
 
 ```text
-LocalState/data
+E:\OpenMW\data\Morrowind.esm
 ```
 
-3. Upload the **contents** of your Morrowind `Data Files` directory into:
+If it cannot find this file, it checks internal `LocalState` storage instead.
+
+### Internal storage setup
+
+Open the app's `LocalState` folder through the Xbox Device Portal and create:
 
 ```text
-LocalState/data
+LocalState\data
 ```
 
-OpenMW will use internal storage whenever it detects:
+Upload the contents of Morrowind's original `Data Files` folder into it. Upload `Morrowind.ini` directly to the root of `LocalState`.
+
+The final layout should include:
 
 ```text
-LocalState/data/Morrowind.esm
+LocalState\Morrowind.ini
+LocalState\data\Morrowind.esm
+LocalState\data\Morrowind.bsa
 ```
 
-### First Launch & Controls
-A clean first launch automatically generates a default configuration file:
+### First launch and setup wizard
+
+A clean installation opens the **Setup Wizard** automatically. You can run it again later from the launcher front page.
+
+The wizard checks external storage first, followed by `LocalState`. It looks for:
 
 ```text
-openmw.cfg
+Morrowind.ini
+data\Morrowind.esm
+data\Morrowind.bsa
 ```
 
-*Tribunal* and *Bloodmoon* expansions are automatically recognized when their files are present.
+For a new installation:
 
-The launcher features graphics settings alongside three core modding tabs:
-- **Data Directories**
-- **Content Files**
-- **Archive Files**
+1. Leave **Import Settings From Morrowind.ini** enabled.
+2. Leave **Import Add-on and Plugin Selection** enabled.
+3. Disable **Import Bitmap Fonts Setup From Morrowind.ini** if you want to keep OpenMW's clearer TrueType fonts.
+4. Review the detected installation and select **Apply**.
 
-#### Launcher Controls
-- **D-pad:** Navigate menus
-- **A:** Select / Confirm
+Importing `Morrowind.ini` restores original game information used for intro movies, weather, level up text and other Morrowind data.
+
+If you run the wizard again after setting up mods, enable only **Import Settings From Morrowind.ini**. Disable the add-on/plugin and bitmap font options so your content order is preserved.
+
+The wizard backs up the current configuration as:
+
+```text
+LocalState\openmw.cfg.bak
+```
+
+Rerunning the wizard also refreshes the archive list from `Morrowind.ini`. If you use mod archives, check **Modding > Archive Files** afterwards.
+
+Start with an unmodded game and confirm that it reaches the main menu before adding mods.
+
+### Launcher controls
+
+- **D-pad:** Navigate
+- **A:** Select or confirm
 - **B:** Go back
 - **LB / RB:** Switch tabs
-- **D-pad Left / Right:** Switch between list items and sidebar buttons
-- **Menu / Start:** Launch Morrowind directly from any page
+- **D-pad Left / Right:** Switch between a list and its action buttons
+- **Menu / Start:** Launch Morrowind from any launcher page
 
-Start with an unmodded, vanilla game first to verify your base installation works smoothly before adding mods.
+### Recommended settings
 
-#### Recommended Initial Settings
-On your first launch, run through these menus to tweak your base configuration:
+The launcher settings closely follow the desktop OpenMW launcher. Options that are unsafe or unsupported on Xbox have been left out.
 
-* **Graphics:** Set your resolution and enable **VSync**. If playing on a higher resolution display, increase the **UI Scale** for better text readability and enable **Stretch menu background** to display backgrounds cleanly in widescreen.
-* **Input:** Enable **Controller menus** for easier console navigation. You may also want to reduce the **Menu cursor speed**.
-* **Gameplay:** Check the **Gameplay** tab for additional quality of life toggles and settings to fit your playstyle.
+- **Display:** Choose the resolution, VSync and frame limit. Fullscreen is recommended. You can also enable **Show FPS** here.
+- **Interface:** Adjust the GUI scaling factor and font size if text is too small. Enable **Stretch menu background** for widescreen displays. Controller menus and controller tooltips are also found here.
+- **Input:** Adjust look sensitivity, stick dead zone and menu cursor speed.
+- **Gameplay:** Contains OpenMW gameplay fixes and quality of life options.
+- **Visuals:** Contains animations, textures, shaders, terrain, post-processing, shadows, lighting and water settings.
 
-### Performance & Graphics Settings
-Because OpenMW translates graphics calls through a custom multi-layer pipeline:
+### Performance and graphics
+
+This port passes the game through several graphics layers:
 
 ```text
 OpenMW > OpenSceneGraph > desktop OpenGL > Mesa/Gallium > Xbox GPU
 ```
 
-Performance can drop quickly if heavy visual settings are enabled. To maintain a steadier frame rate:
-- Keep **post-processing off**.
-- Keep **shadows off**, or only enable essential options with modest shadow resolution.
-- Keep **water textures and reflections modest**, and avoid combining multiple water effects.
-- Keep **viewing distance sensible**; avoid expansive distant terrain.
-- Reduce the **rendering resolution** if you need to lower GPU load. You can only do this in the launcher, not in game.
+Vanilla Morrowind can run well, but heavy graphics settings and large mod lists add up quickly.
 
-> **Important Warning:** Anti-aliasing is disabled by default because it crashes Mesa. Do not attempt to add or restore an `antialiasing` setting in `settings.cfg`.
+To improve performance:
 
-### Installing Mods on Xbox
-External mods can be stored on your USB drive under:
+1. Disable **Settings > Visuals > Post Processing**.
+2. Reduce or disable options under **Settings > Visuals > Shadows**.
+3. Lower water textures, reflections and ripple detail under **Settings > Visuals > Water**.
+4. Reduce viewing distance and distant land under **Settings > Visuals > Terrain**.
+5. Select a lower resolution under **Settings > Display**.
+6. Reduce heavy texture, groundcover and script-heavy mods.
+
+Rendering resolution must be selected in the launcher before starting the game. Changing it from the in-game menu is not supported reliably by the Xbox graphics path.
+
+> **Important:** Anti-aliasing is disabled because it can crash the Mesa graphics driver. Do not manually add or restore an `antialiasing` setting in `settings.cfg`.
+
+### Installing mods on Xbox
+
+External mods can be stored under:
 
 ```text
-E:/OpenMW/mods
+E:\OpenMW\mods
 ```
 
-Keep each mod inside its own dedicated subfolder while preserving the directory structure provided by the mod author. Internal mods can also be stored under `LocalState`.
+Internal mods can also be stored under `LocalState`. Keep each mod in its own folder and preserve the layout supplied by the mod author.
 
-In the launcher:
-1. Add the mod's actual data folder under **Data Directories**.
+Open **Modding** from the launcher and use its three tabs:
+
+1. Add each mod's actual data folder under **Data Directories**.
 2. Enable its required plugins under **Content Files**.
-3. Add any `.bsa` files under **Archive Files**.
-4. Arrange your load order strictly according to the mod instructions.
+3. Add any required `.bsa` files under **Archive Files**.
+4. Arrange everything in the order given by the mod instructions.
 
-Avoid enabling every plugin automatically, as mods often include optional or mutually exclusive plugin choices.
+Do not enable every plugin automatically. Many mods include optional files, compatibility patches or choices that should not be used together.
 
-### Move a Desktop Mod Setup to Xbox
-For a large mod list (such as the **Morrowind Starter Pack** from Modding-OpenMW), configuring and testing everything on PC first is much easier.
+### Move a desktop mod setup to Xbox
 
-1. Finish and validate the setup on PC.
-2. Let `openmw-navmeshtool` finish generating navigation data if you want pre-built pathfinding caches.
-3. Copy your complete PC mods folder to your USB drive:
+For a large mod list, configuring and testing everything on PC first is much easier. The **Morrowind Starter Pack** from [Modding-OpenMW](https://modding-openmw.com/) has been tested this way.
+
+1. Finish and test the setup on PC.
+2. Let `openmw-navmeshtool` finish if you want to transfer its generated navigation cache.
+3. Copy the complete mods folder to:
 
 ```text
-E:/OpenMW/mods
+E:\OpenMW\mods
 ```
 
-4. In `openmw.cfg`, replace desktop drive paths with USB drive paths:
+4. In `openmw.cfg`, replace desktop mod paths with their Xbox locations. For example:
 
 ```text
 data="E:/OpenMW/mods/Patch for Purists"
 ```
 
-*(Replaces paths like `data="C:\OpenMWMods\Patch for Purists"`)*
-
-5. Change the main game data path to:
+5. Set the main game-data path to:
 
 ```text
 data="E:/OpenMW/data"
 ```
 
-6. Check that no `data=` line still points to local PC drives.
-7. Upload `openmw.cfg`, `settings.cfg`, and `navmesh.db` (if generated) directly to the root of `LocalState`.
+6. Check that no `data=` entry still points to a drive or folder on the PC.
+7. Upload `openmw.cfg`, `settings.cfg` and `navmesh.db`, if generated, to the root of `LocalState`.
 
-*Note on Performance:* Complex setups like the Morrowind Starter Pack run around **15–25 FPS** on console. Treat heavy modding as an experimental compatibility test rather than a target for high-framerate gameplay.
+Do not run the complete setup wizard import after uploading an existing mod configuration. If you need to restore the original Morrowind settings, run the wizard with only **Import Settings From Morrowind.ini** enabled, then check **Archive Files** before launching.
 
-#### If Performance Drops Severely, Lower Settings in This Order:
-1. Disable post-processing.
-2. Reduce or disable shadows.
-3. Lower water quality and reflections.
-4. Reduce viewing distance and distant terrain.
-5. Lower rendering resolution.
-6. Remove heavy visual or texture overhaul mods.
-7. Reduce active script-heavy plugins in your load order.
+Large mod lists can be demanding. The Morrowind Starter Pack has run at roughly **15 to 25 FPS** in testing, depending on the location and enabled graphics settings.
 
-### Saves & Backups
-OpenMW keeps saves, configuration files, logs, caches, and `navmesh.db` inside `LocalState`. Always back up `LocalState` via the Xbox Device Portal before uninstalling the app or making major changes to your mod list.
+### Saves and backups
 
-### Quick Fixes
+OpenMW keeps saves, configuration files, logs, caches and `navmesh.db` inside `LocalState`.
+
+Back up `LocalState` through the Xbox Device Portal before uninstalling the app or making large changes to a mod list. Uninstalling the package removes its internal storage.
+
+### Quick fixes
 
 #### Morrowind is not found
-Verify that `Morrowind.esm` exists in one of these paths:
+
+Check that the required files exist in one of these layouts:
+
 ```text
-E:/OpenMW/data/Morrowind.esm
-LocalState/data/Morrowind.esm
+E:\OpenMW\Morrowind.ini
+E:\OpenMW\data\Morrowind.esm
+E:\OpenMW\data\Morrowind.bsa
 ```
 
+```text
+LocalState\Morrowind.ini
+LocalState\data\Morrowind.esm
+LocalState\data\Morrowind.bsa
+```
+
+#### Intro movies are missing
+
+Run the **Setup Wizard** and import the settings from `Morrowind.ini`. These settings include the original movie entries.
+
+#### A mod archive disappeared after running the wizard
+
+Open **Modding > Archive Files** and add or enable the mod's `.bsa` file again. The wizard refreshes this list from `Morrowind.ini`.
+
 #### Copied desktop settings crash the game
-Remove anti-aliasing and desktop only post-processing settings from `settings.cfg`. Start with lighter shadow and water options.
+
+Remove anti-aliasing and desktop-only post-processing settings from `settings.cfg`. Start with post-processing disabled and lighter shadow and water settings.
 
 #### Performance is poor
-Disable post-processing first. Next, reduce shadows, water effects, viewing distance, and resolution. Test on a clean, unmodded save.
+
+Disable post-processing first. Then reduce shadows, water effects, viewing distance and resolution. Test without mods to separate a port problem from a demanding mod setup.
 
 ---
 
