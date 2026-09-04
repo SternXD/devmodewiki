@@ -5,57 +5,58 @@ description: Privacy policy explaining how XEHBot handles data in the Xbox Emula
 
 # XEHBot Privacy Policy
 
-**Effective Date: June 12, 2026**
+**Effective Date: September 4, 2026**
 
-This privacy policy explains how XEHBot ("the Bot") handles, processes, and stores data within Discord. We are committed to protecting the privacy of our users and maintaining transparency about what data we interact with.
+This Privacy Policy outlines how XEHBot ("the Bot") collects, uses, and protects data within the Xbox Emulation Hub Discord server.
 
-## 1. Data We Process
+## 1. Information We Collect
 
-### A. Data Stored in Our Database
-We only store the minimum configuration and moderation data necessary for the Bot's features:
-* **Server Settings:** Channel IDs for welcome messages, logs, and the honeypot.
-* **Autoresponder Rules:** Custom keywords and their corresponding reply messages configured by server administrators.
-* **Moderation Records:** Warning records, strikes, mutes, kicks, and bans. This includes Discord User IDs, Moderator IDs, timestamps, case numbers, and reasons.
-* **Active Mutes:** A list of currently muted Discord User IDs and their expiration times so the Bot knows when to automatically unmute them.
+### A. Stored Data
+We only store the minimum data necessary to run the bot's moderation and server utility features:
+* **Server Configuration:** Discord Channel IDs designated for welcome messages, moderation logs, and honeypot traps.
+* **Moderation Records:** Logs of warns, strikes, mutes, kicks, and bans. This includes Discord User IDs, Moderator IDs, timestamps, case numbers, and staff-provided reasons.
+* **Active Mutes:** User IDs of currently muted members and their mute expiration timestamps to handle automatic unmuting and prevent punishment evasion across rejoins.
 
-### B. Data Processed in Memory (Not Stored)
-* **Message Content:** The Bot processes the text of messages to check for custom keywords that trigger autoresponder replies and to detect spam or malicious links in the honeypot channel. This text is processed entirely in memory, is never logged, saved, or stored, and is discarded immediately after processing.
-* **Member Join/Leave Events:** The Bot processes member events to log welcome/leave activity and to manage active mutes (re-applying mutes if a user leaves and rejoins).
-
----
-
-## 2. How We Use the Data
-We use the collected information solely to provide, operate, and maintain the Bot's features, specifically:
-* Running moderation tools and enforcing server rules.
-* Triggering automated keyword responses.
+### B. Transient Data (Not Stored)
+* **Join and Leave Activity:** Member join and departure events are processed in real time to post welcome messages, log account creation age for raid detection, and re-apply active mutes.
+* **Honeypot Activity:** Message activity in any honeypot channels is processed solely to identify and automatically softban spambots. Message content is not logged or stored.
 
 ---
 
-## 3. Data Retention & Security
+## 2. How We Use Information
 
-* **Moderation Records:** Retention of moderation history is at the discretion of the server administrators to maintain safety.
-* **Active Mutes:** Active mute data is automatically deleted from our database as soon as the mute duration expires and the user is unmuted.
-* **Security:** All stored data is kept in a secure, private database (`redb`) hosted on our private server. Access to the database is restricted strictly to the Bot's hosting administrators and developers.
-
----
-
-## 4. Third-Party Sharing and AI Training
-
-* **No Third-Party Sharing:** We do not sell, trade, rent, or share any user data with third-party services or external entities.
-* **No AI/ML Training:** Message content and user data are never used to train machine learning models, artificial intelligence (AI), or large language models (LLMs).
+Collected data is used exclusively to operate the bot within the Xbox Emulation Hub server, specifically to:
+* Enforce server rules and track moderation history.
+* Maintain security logging (join/leave events and anti-raid checks).
+* Automatically re-apply timeouts if a muted user leaves and rejoins.
 
 ---
 
-## 5. Data Deletion & User Rights
+## 3. Data Retention and Security
 
-Users have the right to request the deletion of any data associated with them.
-* **Server-Specific Deletion:** Server administrators can remove or reset the Bot's settings and moderation logs at any time.
-* **Global Deletion Requests:** If you want your moderation history or any other stored data permanently deleted from the Bot's database, you can contact the Bot Owner/Developer directly.
+* **Moderation Records:** Stored indefinitely at the discretion of server administrators to maintain community safety.
+* **Active Mutes:** Deleted automatically as soon as the timeout duration expires.
+* **Security:** All data is stored in a private local database hosted directly on our server. Access is strictly limited to bot administrators.
 
 ---
 
-## 6. Contact Information
+## 4. Third-Party Sharing
 
-If you have questions about this policy or wish to submit a data deletion request, you can contact:
+* **No Data Sharing:** We do not sell, rent, trade, or share user data with any third parties or external services.
+* **No AI Training:** User data is never used to train machine learning models, artificial intelligence, or language models.
+
+---
+
+## 5. Data Deletion Requests
+
+Because the only data we store consists of moderation logs (warns, strikes, mutes, bans) and basic server configuration, records are retained for community safety and security.
+
+* **Moderation Records:** Moderation history is maintained for security and rule enforcement purposes and will not be deleted upon request, except at the sole discretion of server administrators.
+
+---
+
+## 6. Contact
+
+If you have questions about this policy or wish to submit an inquiry, you can reach out via:
 * **Bot Developer / Owner:** Discord: `.stern.` (or via the Xbox Emulation Hub Discord server)
-* **Support / Inquiries:** Please contact the server staff.
+* **Server:** Contact staff within the Xbox Emulation Hub Discord server.
